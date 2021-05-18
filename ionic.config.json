@@ -1,0 +1,7 @@
+{
+  "name": "bravel",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
