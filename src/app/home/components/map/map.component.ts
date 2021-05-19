@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Location } from 'src/app/shared/models/Location';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { LocationService } from 'src/app/core/services/location/location.service';
 
 import * as L from 'leaflet';
 
@@ -12,26 +13,16 @@ import * as L from 'leaflet';
 export class MapComponent implements OnInit, AfterViewInit {
   private map;
 
-  constructor(private geolocation: Geolocation) {}
+  constructor(private locationService: LocationService) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.getCoords().then((res: Location) => {
+    this.locationService.getCoords().then((res: Location) => {
       if (res) {
         this.initMap(res.lat, res.lon);
       }
     });
-  }
-
-  private async getCoords(): Promise<Location> {
-    let res;
-    try {
-      res = await this.geolocation.getCurrentPosition();
-    } catch (error) {
-      console.log(error);
-    }
-    return { lat: res.coords.latitude, lon: res.coords.longitude };
   }
 
   private initMap(x: number, y: number): void {

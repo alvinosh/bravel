@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationService } from 'src/app/core/services/location/location.service';
 
 @NgModule({
   declarations: [MapComponent, NavbarComponent, HomePage],
@@ -21,6 +22,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     HomePageRoutingModule,
     CoreModule,
   ],
-  providers: [Geolocation],
+  providers: [Geolocation, LocationService],
 })
 export class HomePageModule {}
