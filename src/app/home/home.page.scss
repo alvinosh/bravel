@@ -1,27 +1,20 @@
-#container {
-  text-align: center;
+.content {
+  height: 100%;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.map {
+  height: 100%;
+
+  flex-grow: 1;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.nav-bar {
+  height: 100%;
 
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  flex-basis: 2%;
 }

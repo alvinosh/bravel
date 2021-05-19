@@ -10,30 +10,28 @@ import * as L from 'leaflet';
 export class MapComponent implements OnInit, AfterViewInit {
   private map;
 
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [39.8282, -98.5795],
-      zoom: 3,
-    });
-
-    const tiles = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        maxZoom: 18,
-        minZoom: 3,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }
-    );
-
-    tiles.addTo(this.map);
-  }
-
   constructor() {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.initMap();
+    this.initMap(39.8282, -98.5795);
+  }
+
+  private initMap(x: number, y: number): void {
+    this.map = L.map('map', {
+      center: [x, y],
+      zoom: 15,
+    });
+
+    const tiles = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        maxZoom: 20,
+        minZoom: 5,
+      }
+    );
+
+    tiles.addTo(this.map);
   }
 }
