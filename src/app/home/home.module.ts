@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { CoreModule } from 'src/app/core/core.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MapComponent } from './components/map/map.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -21,6 +22,7 @@ import { LocationService } from 'src/app/core/services/location/location.service
     IonicModule,
     HomePageRoutingModule,
     CoreModule,
+    FontAwesomeModule,
   ],
   providers: [Geolocation, LocationService],
 })

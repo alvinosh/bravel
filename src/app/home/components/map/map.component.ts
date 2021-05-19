@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+
 import { Location } from 'src/app/shared/models/Location';
 
 import { LocationService } from 'src/app/core/services/location/location.service';
@@ -27,6 +28,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private initMap(x: number, y: number): void {
     this.map = L.map('map', {
+      attributionControl: false,
       center: [x, y],
       zoom: 15,
     });

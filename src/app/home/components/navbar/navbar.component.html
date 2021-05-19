@@ -1,3 +1,29 @@
-<p>
-  navbar works!
-</p>
+<div class="navbar">
+  <ul class="nav">
+    <li class="item" [class.active]="active === 1">
+      <button (click)="setActive(1)">
+        <fa-icon [icon]="faShare"></fa-icon>
+      </button>
+    </li>
+    <li class="item" [class.active]="active === 2">
+      <button (click)="setActive(2)">
+        <fa-icon [icon]="faCommentAlt"></fa-icon>
+      </button>
+    </li>
+    <li class="item" [class.active]="active === 3">
+      <button (click)="setActive(3)">
+        <fa-icon [icon]="faAddressBook"></fa-icon>
+      </button>
+    </li>
+    <li class="item" [class.active]="active === 4">
+      <button (click)="setActive(4)">
+        <fa-icon [icon]="faCog"></fa-icon>
+      </button>
+    </li>
+    <li class="item" [class.active]="active === 5">
+      <button (click)="setActive(5)">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+    </li>
+  </ul>
+</div>

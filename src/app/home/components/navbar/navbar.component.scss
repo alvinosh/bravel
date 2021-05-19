@@ -1,0 +1,76 @@
+@import "/src/app/config/theme.scss";
+
+$size: 70px;
+
+* {
+  font-size: 2rem;
+}
+
+.navbar {
+  background-color: $base-color;
+}
+
+.nav {
+  height: 100%;
+
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.item:last-child {
+  margin-top: auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  background: none;
+
+  color: $text-color;
+
+  width: $size;
+  height: $size;
+
+  transition: color 0.3s;
+}
+
+button:hover {
+  transform: scale(0.95);
+  color: $active-color;
+}
+
+.active {
+  background-color: rgba($color: #000000, $alpha: 0.2);
+  color: $active-color !important;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar {
+    width: $size;
+    height: 100%;
+  }
+
+  .nav {
+    flex-flow: column nowrap;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    height: $size;
+    width: 100%;
+  }
+
+  .nav {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+  }
+}
