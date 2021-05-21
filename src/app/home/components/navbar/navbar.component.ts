@@ -6,6 +6,7 @@ import {
   faCommentAlt,
   faCog,
   faPlus,
+  faGlobeAmericas,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Page } from 'src/app/shared/models/Page';
@@ -23,6 +24,8 @@ export class NavbarComponent implements OnInit {
   faCommentAlt = faCommentAlt;
   faCog = faCog;
   faPlus = faPlus;
+  faGlobeAmericas = faGlobeAmericas;
+
   Page = Page;
 
   active: Page = Page.Back;

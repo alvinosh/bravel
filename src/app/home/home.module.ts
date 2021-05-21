@@ -21,7 +21,6 @@ import { LocationService } from 'src/app/core/services/location/location.service
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-
     FontAwesomeModule,
   ],
   providers: [Geolocation, LocationService],

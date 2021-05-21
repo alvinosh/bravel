@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Page } from 'src/app/shared/models/Page';
 
 @Component({
@@ -6,7 +6,7 @@ import { Page } from 'src/app/shared/models/Page';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit, OnChanges {
+export class SidebarComponent implements OnInit {
   @Input() page: Page = Page.Back; // decorate the property with @Input(
 
   Page = Page;
@@ -15,13 +15,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     return x === this.page;
   }
 
-  constructor() {
-    console.log(this.page);
-  }
+  constructor() {}
 
   ngOnInit() {}
-
-  ngOnChanges() {
-    console.log(this.page);
-  }
 }
