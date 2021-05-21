@@ -1,7 +1,8 @@
-.nav {
+@import "/src/app/config/theme.scss";
+.content {
   position: absolute;
 
-  z-index: 500;
+  z-index: 5000;
 }
 
 .map {
@@ -9,18 +10,36 @@
   height: 100%;
 }
 
-@media only screen and (min-width: 600px) {
-  .nav {
+@media only screen and (min-width: $break-point-1) {
+  .content {
     top: 0;
     right: 0;
+    height: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .nav {
     height: 100%;
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .nav {
+@media only screen and (max-width: $break-point-1) {
+  .content {
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .sidebar {
+    flex: 1;
+  }
+
+  .nav {
     width: 100%;
   }
 }

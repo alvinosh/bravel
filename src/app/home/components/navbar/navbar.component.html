@@ -1,27 +1,27 @@
 <div class="navbar">
   <ul class="nav">
-    <li class="item" [class.active]="active === 1">
-      <button (click)="setActive(1)">
+    <li class="item" [class.active]="isActive(Page.Back)">
+      <button (click)="setActive(Page.Back)">
         <fa-icon [icon]="faShare"></fa-icon>
       </button>
     </li>
-    <li class="item" [class.active]="active === 2">
-      <button (click)="setActive(2)">
+    <li class="item" [class.active]="isActive(Page.Chat)">
+      <button (click)="setActive(Page.Chat)">
         <fa-icon [icon]="faCommentAlt"></fa-icon>
       </button>
     </li>
-    <li class="item" [class.active]="active === 3">
-      <button (click)="setActive(3)">
+    <li class="item" [class.active]="isActive(Page.Online)">
+      <button (click)="setActive(Page.Online)">
         <fa-icon [icon]="faAddressBook"></fa-icon>
       </button>
     </li>
-    <li class="item" [class.active]="active === 4">
-      <button (click)="setActive(4)">
+    <li class="item" [class.active]="isActive(Page.Settings)">
+      <button (click)="setActive(Page.Settings)">
         <fa-icon [icon]="faCog"></fa-icon>
       </button>
     </li>
-    <li class="item" [class.active]="active === 5">
-      <button (click)="setActive(5)">
+    <li class="item" [class.active]="isActive(Page.Add)">
+      <button (click)="setActive(Page.Add)">
         <fa-icon [icon]="faPlus"></fa-icon>
       </button>
     </li>

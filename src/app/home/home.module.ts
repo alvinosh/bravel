@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { CoreModule } from 'src/app/core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MapComponent } from './components/map/map.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
@@ -15,13 +15,13 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationService } from 'src/app/core/services/location/location.service';
 
 @NgModule({
-  declarations: [MapComponent, NavbarComponent, HomePage],
+  declarations: [SidebarComponent, MapComponent, NavbarComponent, HomePage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    CoreModule,
+
     FontAwesomeModule,
   ],
   providers: [Geolocation, LocationService],
