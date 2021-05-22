@@ -1,6 +1,6 @@
 <div [class.hide]="page === Page.Back" class="content">
-  <h1 *ngIf="page === Page.Chat">Chat</h1>
-  <h1 *ngIf="page === Page.Online">Online</h1>
-  <h1 *ngIf="page === Page.Settings">Settings</h1>
-  <h1 *ngIf="page === Page.Add">Add</h1>
+  <app-chat *ngIf="page === Page.Chat">Chat</app-chat>
+  <app-online *ngIf="page === Page.Online">Online</app-online>
+  <app-settings *ngIf="page === Page.Settings">Settings</app-settings>
+  <app-add *ngIf="page === Page.Add">Add</app-add>
 </div>

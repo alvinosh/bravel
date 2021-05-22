@@ -13,9 +13,22 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LocationService } from 'src/app/core/services/location/location.service';
+import { ChatComponent } from './components/sidebar/components/chat/chat.component';
+import { OnlineComponent } from './components/sidebar/components/online/online.component';
+import { AddComponent } from './components/sidebar/components/add/add.component';
+import { SettingsComponent } from './components/sidebar/components/settings/settings.component';
 
 @NgModule({
-  declarations: [SidebarComponent, MapComponent, NavbarComponent, HomePage],
+  declarations: [
+    ChatComponent,
+    OnlineComponent,
+    AddComponent,
+    SettingsComponent,
+    SidebarComponent,
+    MapComponent,
+    NavbarComponent,
+    HomePage,
+  ],
   imports: [
     CommonModule,
     FormsModule,
