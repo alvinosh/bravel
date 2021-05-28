@@ -8,4 +8,10 @@
   width: 95%;
 
   margin: auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+}
+.messages {
+  flex-grow: 1;
 }

@@ -18,6 +18,7 @@ import { OnlineComponent } from './components/sidebar/components/online/online.c
 import { AddComponent } from './components/sidebar/components/add/add.component';
 import { SettingsComponent } from './components/sidebar/components/settings/settings.component';
 import { MessageComponent } from './components/sidebar/components/chat/message/message.component';
+import { MessageFormComponent } from './components/sidebar/components/chat/message-form/message-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MessageComponent } from './components/sidebar/components/chat/message/m
     MapComponent,
     NavbarComponent,
     MessageComponent,
+    MessageFormComponent,
     HomePage,
   ],
   imports: [

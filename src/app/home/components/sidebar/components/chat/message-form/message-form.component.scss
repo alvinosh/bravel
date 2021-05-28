@@ -1,0 +1,50 @@
+@import "/src/app/config/theme.scss";
+
+.container {
+  $border-radius: 20px;
+
+  width: 95%;
+  background-color: $color-2;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: stretch;
+
+  margin: 5% auto;
+
+  -moz-border-radius: $border-radius; //for mozilla support
+  -webkit-border-radius: $border-radius; //for chrome support
+  border-radius: $border-radius;
+
+  overflow: hidden;
+
+  border: $other-1 2px solid;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+
+  background-color: $color-2;
+  color: $other-1;
+
+  padding: 3% 5%;
+
+  border: none;
+
+  background: linear-gradient(
+    360deg,
+    rgba(255, 112, 57, 0.1) 0%,
+    rgba(255, 152, 0, 0) 80%
+  );
+}
+button {
+  border: 0;
+  padding: 0;
+
+  font-size: 1.2rem;
+
+  background-color: $other-1;
+  color: $color-2;
+  width: 12%;
+}
