@@ -1,0 +1,39 @@
+@import "/src/app/config/theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+h3 {
+  font-size: 0.8rem;
+  font-style: bold;
+  font-family: Roboto, Helvetica, sans-serif;
+
+  color: $other-1;
+}
+
+.content {
+  $border-radius: 7px;
+
+  background-color: $other-1;
+
+  padding: 3% 6%;
+
+  -moz-border-radius: $border-radius; //for mozilla support
+  -webkit-border-radius: $border-radius; //for chrome support
+  border-radius: $border-radius;
+}
+
+.content p {
+  font-size: 0.9rem;
+  font-family: Roboto, Helvetica, sans-serif;
+
+  color: $color-2;
+}

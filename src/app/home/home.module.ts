@@ -17,6 +17,7 @@ import { ChatComponent } from './components/sidebar/components/chat/chat.compone
 import { OnlineComponent } from './components/sidebar/components/online/online.component';
 import { AddComponent } from './components/sidebar/components/add/add.component';
 import { SettingsComponent } from './components/sidebar/components/settings/settings.component';
+import { MessageComponent } from './components/sidebar/components/chat/message/message.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SettingsComponent } from './components/sidebar/components/settings/sett
     SidebarComponent,
     MapComponent,
     NavbarComponent,
+    MessageComponent,
     HomePage,
   ],
   imports: [
