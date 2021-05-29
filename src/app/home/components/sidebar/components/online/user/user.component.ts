@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Color } from 'src/app/shared/models/Color';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/User';
 
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { NumericValueAccessor } from '@ionic/angular';
 
 @Component({
   selector: 'app-user',
@@ -11,17 +9,9 @@ import { NumericValueAccessor } from '@ionic/angular';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  faUserCircle = faUserCircle;
+  @Input() user: User;
 
-  user: User = {
-    id: 1,
-    username: 'lol',
-    location: {
-      lat: 4,
-      lon: 5,
-    },
-    color: Color.Black,
-  };
+  faUserCircle = faUserCircle;
 
   distance: number;
 

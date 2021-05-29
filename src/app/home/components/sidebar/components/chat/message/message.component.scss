@@ -9,10 +9,12 @@
   width: 95%;
   margin: auto;
   padding-top: 10px;
+
+  font-size: 15px;
 }
 
 h3 {
-  font-size: 0.8rem;
+  font-size: 0.9em;
   font-style: bold;
   font-family: Roboto, Helvetica, sans-serif;
 
@@ -32,7 +34,7 @@ h3 {
 }
 
 .content p {
-  font-size: 0.9rem;
+  font-size: 1em;
   font-family: Roboto, Helvetica, sans-serif;
 
   color: $color-2;

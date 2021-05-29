@@ -1,4 +1,3 @@
 <div class="online">
-  <app-user></app-user>
-  <app-user></app-user>
+  <app-user *ngFor="let user of users" [user]="user"></app-user>
 </div>
