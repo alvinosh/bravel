@@ -7,7 +7,7 @@ import { Page } from '../shared/models/Page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  currentPage: Page = Page.Back;
+  currentPage: Page = Page.Online;
 
   setPage(x: Page) {
     this.currentPage = x;

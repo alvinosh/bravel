@@ -1,0 +1,54 @@
+@use "sass:color";
+
+@import "/src/app/config/theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+
+  padding: 10px 0;
+  margin: auto;
+
+  background-color: $color-2;
+
+  border-bottom: color.adjust($other-2, $alpha: -0.6%) 2px solid;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-size: 15px;
+}
+
+fa-icon {
+  font-size: 3em;
+  padding: 5px;
+
+  color: $color-3;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  margin-left: 0.2em;
+
+  padding: 5px;
+}
+
+.content h2 {
+  font-size: 1.5em;
+  color: $other-1;
+}
+
+.content h6 {
+  font-size: 1em;
+  color: $other-2;
+}

@@ -10,6 +10,7 @@ export class MessageComponent implements OnInit {
   msg: Message = {
     author: 'bakely',
     content: 'what ya doing there mf',
+    senderId: 4,
   };
 
   constructor() {}
