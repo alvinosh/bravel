@@ -8,14 +8,11 @@
 }
 
 .container {
-  width: 90%;
-
   padding: 10px 0;
-  margin: auto;
 
   background-color: $color-2;
 
-  border-bottom: color.adjust($other-2, $alpha: -0.6%) 2px solid;
+  // border-bottom: color.adjust($other-2, $alpha: -0.6%) 2px solid;
 
   display: flex;
   flex-flow: row nowrap;

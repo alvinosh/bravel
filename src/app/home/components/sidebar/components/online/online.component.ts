@@ -1,4 +1,3 @@
-import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Color } from 'src/app/shared/models/Color';
 import { User } from 'src/app/shared/models/User';
@@ -12,7 +11,7 @@ export class OnlineComponent implements OnInit {
   users: User[] = [];
 
   constructor() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
       let user: User = {
         id: 5,
         username: 'testest',
