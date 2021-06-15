@@ -20,6 +20,7 @@ import { SettingsComponent } from './components/sidebar/components/settings/sett
 import { MessageComponent } from './components/sidebar/components/chat/message/message.component';
 import { MessageFormComponent } from './components/sidebar/components/chat/message-form/message-form.component';
 import { UserComponent } from './components/sidebar/components/online/user/user.component';
+import { GroupComponent } from './components/sidebar/components/chat/group/group.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserComponent } from './components/sidebar/components/online/user/user.
     MessageFormComponent,
     UserComponent,
     HomePage,
+    GroupComponent,
   ],
   imports: [
     CommonModule,

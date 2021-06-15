@@ -1,7 +1,7 @@
 @import "/src/app/config/theme.scss";
 
 .container {
-  $border-radius: 20px;
+  $border-radius: 10px;
 
   width: 95%;
   background-color: $color-2;
@@ -32,6 +32,8 @@ input[type="text"] {
 
   border: none;
 
+  overflow-x: scroll;
+
   background: linear-gradient(
     360deg,
     rgba(255, 112, 57, 0.1) 0%,
@@ -46,5 +48,16 @@ button {
 
   background-color: $other-1;
   color: $color-2;
-  width: 12%;
+}
+
+@media only screen and (min-width: $break-point-1) {
+  button {
+    width: 15%;
+  }
+}
+
+@media only screen and (max-width: $break-point-1) {
+  button {
+    width: 10%;
+  }
 }
