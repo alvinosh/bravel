@@ -1,0 +1,20 @@
+@use "sass:color";
+@import "/src/app/config/theme.scss";
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background-color: lighten($color-2, 7%);
+
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 1px solid $color-1;
+  color: $other-1;
+}
+
+label {
+  color: $other-1;
+}

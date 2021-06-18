@@ -4,5 +4,6 @@ div {
   width: 100vw;
   height: 100vh;
 
-  background-color: $color-2;
+  background: $color-1;
+  background: linear-gradient(-225deg, $color-1 0%, $color-3 100%);
 }
