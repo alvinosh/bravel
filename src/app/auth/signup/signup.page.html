@@ -2,18 +2,19 @@
   <app-form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <h1>Signup</h1>
 
-    <app-text-input
-      [type]="type.Text"
-      label="First Name"
-      formControlName="firstname"
-    ></app-text-input>
+    <div class="name">
+      <app-text-input
+        [type]="type.Text"
+        label="First Name"
+        formControlName="firstname"
+      ></app-text-input>
 
-    <app-text-input
-      [type]="type.Text"
-      label="Last Name"
-      formControlName="lastname"
-    ></app-text-input>
-
+      <app-text-input
+        [type]="type.Text"
+        label="Last Name"
+        formControlName="lastname"
+      ></app-text-input>
+    </div>
     <app-text-input
       [type]="type.Email"
       label="E-Mail"
