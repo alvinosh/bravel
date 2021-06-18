@@ -1,0 +1,11 @@
+<div class="form-row">
+  <label for="input">Test</label>
+  <input
+    type="text"
+    [value]="value"
+    [isDisabled]="isDisabled"
+    (input)="changed($event.target.value)"
+    (blur)="touched()"
+    class="form-element"
+  />
+</div>
