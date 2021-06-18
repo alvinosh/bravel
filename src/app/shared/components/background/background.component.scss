@@ -6,4 +6,9 @@ div {
 
   background: $color-1;
   background: linear-gradient(-225deg, $color-1 0%, $color-3 100%);
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
