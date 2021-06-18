@@ -1,27 +1,27 @@
 @import "/src/app/config/theme.scss";
 
-.form {
+.container {
   margin: auto;
   background-color: $color-2;
-
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
 
   border-radius: 5px;
 
   padding: 20px;
 }
 
+form {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 @media only screen and (min-width: $break-point-2) {
-  .form {
+  .container {
     width: 350px;
   }
 }
 
 @media only screen and (max-width: $break-point-2) {
-  .form {
-    width: 100%;
+  .container {
+    width: 95%;
   }
 }

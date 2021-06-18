@@ -1,0 +1,18 @@
+@import "/src/app/config/theme.scss";
+
+a {
+  margin: 10px auto;
+}
+
+app-button {
+  margin: 10px auto;
+}
+
+h1 {
+  margin: 0;
+  margin-bottom: 15px;
+
+  font-size: 2rem;
+
+  color: $color-3;
+}

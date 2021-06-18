@@ -1,5 +1,7 @@
 <app-background>
   <app-form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1>Login</h1>
+
     <app-text-input
       [type]="type.Email"
       label="E-Mail"
@@ -12,6 +14,8 @@
       formControlName="password"
     ></app-text-input>
 
-    <app-button>Submit</app-button>
+    <app-button>Login</app-button>
+
+    <a href="./signup">Don't Have An Account?</a>
   </app-form>
 </app-background>
