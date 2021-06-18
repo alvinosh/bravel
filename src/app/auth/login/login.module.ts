@@ -10,6 +10,7 @@ import { LoginPage } from './login.page';
 import { FormComponent } from 'src/app/shared/components/form-elements/form/form.component';
 import { BackgroundComponent } from 'src/app/shared/components/background/background.component';
 import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
+import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { TextInputComponent } from 'src/app/shared/components/form-elements/text
     BackgroundComponent,
     FormComponent,
     TextInputComponent,
+    ButtonComponent,
   ],
 })
 export class LoginPageModule {}

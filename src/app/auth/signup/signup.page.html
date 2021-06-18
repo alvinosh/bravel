@@ -1,1 +1,35 @@
-<app-background> hello </app-background>
+<app-background>
+  <app-form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <app-text-input
+      [type]="type.Text"
+      label="First Name"
+      formControlName="firstname"
+    ></app-text-input>
+
+    <app-text-input
+      [type]="type.Text"
+      label="Last Name"
+      formControlName="lastname"
+    ></app-text-input>
+
+    <app-text-input
+      [type]="type.Email"
+      label="E-Mail"
+      formControlName="email"
+    ></app-text-input>
+
+    <app-text-input
+      [type]="type.Password"
+      label="Password"
+      formControlName="password"
+    ></app-text-input>
+
+    <app-text-input
+      [type]="type.Password"
+      label="Confirm Password"
+      formControlName="confirmpassword"
+    ></app-text-input>
+
+    <app-button>Submit</app-button>
+  </app-form>
+</app-background>

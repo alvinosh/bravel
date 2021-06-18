@@ -1,7 +1,17 @@
 <app-background>
   <app-form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <app-text-input formControlName="email"></app-text-input>
-    <app-text-input formControlName="password"></app-text-input>
-    <button type="submit">Submit</button>
+    <app-text-input
+      [type]="type.Email"
+      label="E-Mail"
+      formControlName="email"
+    ></app-text-input>
+
+    <app-text-input
+      [type]="type.Password"
+      label="Password"
+      formControlName="password"
+    ></app-text-input>
+
+    <app-button>Submit</app-button>
   </app-form>
 </app-background>

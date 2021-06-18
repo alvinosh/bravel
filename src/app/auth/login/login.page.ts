@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { InputType } from 'src/app/shared/models/Input';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ export class LoginPage implements OnInit {
     email: [''],
     password: [''],
   });
+
+  type = InputType;
 
   constructor(private fb: FormBuilder) {}
 

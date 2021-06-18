@@ -1,9 +1,9 @@
 <div class="form-row">
-  <label for="input">Test</label>
+  <label for="input">{{ label }}</label>
   <input
-    type="text"
+    [type]="getInput(type)"
     [value]="value"
-    [isDisabled]="isDisabled"
+    [disabled]="isDisabled"
     (input)="changed($event.target.value)"
     (blur)="touched()"
     class="form-element"
