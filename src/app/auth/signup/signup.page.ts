@@ -13,6 +13,7 @@ export class SignupPage implements OnInit {
     firstname: [''],
     lastname: [''],
     email: [''],
+    username: [''],
     password: [''],
     confirmpassword: [''],
   });

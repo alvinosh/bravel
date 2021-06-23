@@ -9,7 +9,7 @@ import { InputType } from 'src/app/shared/models/Input';
 })
 export class LoginPage implements OnInit {
   loginForm = this.fb.group({
-    email: [''],
+    username: [''],
     password: [''],
   });
 
