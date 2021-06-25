@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { InputType } from 'src/app/shared/models/Input';
+
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +18,18 @@ export class LoginPage implements OnInit {
 
   type = InputType;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.loginForm.value);
+  login() {
+    this.authService.login({
+      username: this.loginForm.get('username').value,
+      password: this.loginForm.get('password').value,
+    });
   }
 }

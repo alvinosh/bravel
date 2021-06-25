@@ -12,7 +12,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationService } from 'src/app/core/services/location/location.service';
+import { LocationService } from 'src/app/home/services/location.service';
 import { ChatComponent } from './components/sidebar/components/chat/chat.component';
 import { OnlineComponent } from './components/sidebar/components/online/online.component';
 import { AddComponent } from './components/sidebar/components/add/add.component';

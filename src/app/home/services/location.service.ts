@@ -8,6 +8,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   providedIn: 'root',
 })
 export class LocationService {
+  constructor(private geolocation: Geolocation) {}
+
   async getCoords(): Promise<Location> {
     let res;
     try {
@@ -17,6 +19,4 @@ export class LocationService {
     }
     return { lat: res.coords.latitude, lon: res.coords.longitude };
   }
-
-  constructor(private geolocation: Geolocation) {}
 }

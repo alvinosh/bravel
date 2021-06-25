@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { Location } from 'src/app/shared/models/Location';
 
-import { LocationService } from 'src/app/core/services/location/location.service';
+import { LocationService } from 'src/app/home/services/location.service';
 
 import * as L from 'leaflet';
 
