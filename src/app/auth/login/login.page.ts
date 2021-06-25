@@ -27,9 +27,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   login() {
-    this.authService.login({
-      username: this.loginForm.get('username').value,
-      password: this.loginForm.get('password').value,
-    });
+    this.authService
+      .login({
+        username: this.loginForm.get('username').value,
+        password: this.loginForm.get('password').value,
+      })
+      .subscribe((success) => {
+        if (success) {
+          this.router.navigate(['/home']);
+        }
+      });
   }
 }

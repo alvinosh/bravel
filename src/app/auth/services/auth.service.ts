@@ -7,14 +7,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly TOKEN = 'JWT_TOKEN';
+  private readonly TOKEN = 'TOKEN';
+  private loggedUser: string;
 
   constructor(private http: HttpClient) {}
 
-  login(user: { username: string; password: string }): void {
-    this.http.post<any>(`${environment.apiurl}/login`, user).pipe(
-      tap((tokens) => {
-        console.log(tokens);
+  login(user: { username: string; password: string }): Observable<boolean> {
+    return this.http.post<any>(`${environment.apiurl}/login`, user).pipe(
+      tap((data) => {
+        this.saveToken(data);
+        this.loggedUser = user.username;
       }),
       mapTo(true),
       catchError((error) => {
@@ -24,11 +26,20 @@ export class AuthService {
     );
   }
 
-  isLoggedIn(): boolean {
-    return false;
+  logout() {
+    this.loggedUser = null;
+    localStorage.removeItem(this.TOKEN);
+  }
+
+  isLoggedIn() {
+    return !!this.getJwtToken();
   }
 
   getJwtToken() {
     return localStorage.getItem(this.TOKEN);
+  }
+
+  private saveToken(data: any) {
+    localStorage.setItem(this.TOKEN, data.token);
   }
 }
