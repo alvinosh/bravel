@@ -120,7 +120,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
+          },
+          "exclude": ["**/node_modules/**"]
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",

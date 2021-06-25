@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 import { LoginPageRoutingModule } from './login-routing.module';
 
@@ -11,6 +12,7 @@ import { FormComponent } from 'src/app/shared/components/form-elements/form/form
 import { BackgroundComponent } from 'src/app/shared/components/background/background.component';
 import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
 import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
+import { AuthService } from '../services/auth.service';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { ButtonComponent } from 'src/app/shared/components/form-elements/button/
     LoginPageRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   declarations: [
     LoginPage,
@@ -27,5 +30,6 @@ import { ButtonComponent } from 'src/app/shared/components/form-elements/button/
     TextInputComponent,
     ButtonComponent,
   ],
+  providers: [AuthService],
 })
 export class LoginPageModule {}
