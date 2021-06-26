@@ -12,7 +12,7 @@ import { FormComponent } from 'src/app/shared/components/form-elements/form/form
 import { BackgroundComponent } from 'src/app/shared/components/background/background.component';
 import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
 import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @NgModule({
   imports: [
