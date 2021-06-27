@@ -14,7 +14,7 @@
       formControlName="password"
     ></app-text-input>
 
-    <app-button>Login</app-button>
+    <app-button [disabled]="!loginForm.valid">Login</app-button>
 
     <a href="./signup">Don't Have An Account?</a>
   </app-form>

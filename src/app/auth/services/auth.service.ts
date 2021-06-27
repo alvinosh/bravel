@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { User } from 'src/app/shared/models/User';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,20 +12,19 @@ export class AuthService {
   private readonly TOKEN = 'TOKEN';
   private loggedUser: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(user: { username: string; password: string }): Observable<boolean> {
-    return this.http.post<any>(`${environment.apiurl}/login`, user).pipe(
-      tap((data) => {
-        this.saveToken(data);
-        this.loggedUser = user.username;
-      }),
-      mapTo(true),
-      catchError((error) => {
-        alert(error.error);
-        return of(false);
-      })
-    );
+  login(loginRequest: {
+    username: string;
+    password: string;
+  }): Observable<User> {
+    return this.http
+      .post<any>(`${environment.apiurl}/login`, loginRequest)
+      .pipe(tap((data) => this.doLoginUser(data)));
+  }
+
+  signup(user: User): Observable<void> {
+    return this.http.post<any>(`${environment.apiurl}/signup`, user);
   }
 
   logout() {
@@ -31,15 +32,38 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN);
   }
 
-  isLoggedIn() {
-    return !!this.getJwtToken();
+  logoutAndRedirect() {
+    this.logout();
+    this.router.navigate(['/login']);
   }
 
-  getJwtToken() {
+  doLoginUser(data: any) {
+    localStorage.setItem(this.TOKEN, data.token);
+  }
+
+  doLogoutUser(): void {
+    localStorage.removeItem(this.TOKEN);
+  }
+
+  getCurrentUser(): Observable<User> {
+    const token = this.getToken();
+    if (token) {
+      const encodedPayload = token.split('.')[1];
+      const payload = window.atob(encodedPayload);
+      return of(JSON.parse(payload));
+    } else {
+      return of(undefined);
+    }
+  }
+
+  getToken() {
     return localStorage.getItem(this.TOKEN);
   }
 
-  private saveToken(data: any) {
-    localStorage.setItem(this.TOKEN, data.token);
+  isLoggedIn(): Observable<boolean> {
+    return this.getCurrentUser().pipe(
+      map((user) => !!user),
+      catchError(() => of(false))
+    );
   }
 }

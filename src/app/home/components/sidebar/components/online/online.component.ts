@@ -19,7 +19,9 @@ export class OnlineComponent implements OnInit {
           lon: 5,
           lat: 5,
         },
-        color: Color.Black,
+        email: 'a',
+        firstname: 'a',
+        lastname: 'a',
       };
 
       this.users.push(user);

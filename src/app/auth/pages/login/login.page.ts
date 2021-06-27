@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { InputType } from 'src/app/shared/models/Input';
 
 import { Router } from '@angular/router';
@@ -10,10 +10,10 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   loginForm = this.fb.group({
-    username: [''],
-    password: [''],
+    username: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   type = InputType;
@@ -24,18 +24,18 @@ export class LoginPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  get f() {
+    return this.loginForm.controls;
+  }
 
   login() {
+    const loginRequest = {
+      username: this.f.username.value,
+      password: this.f.password.value,
+    };
+
     this.authService
-      .login({
-        username: this.loginForm.get('username').value,
-        password: this.loginForm.get('password').value,
-      })
-      .subscribe((success) => {
-        if (success) {
-          this.router.navigate(['/home']);
-        }
-      });
+      .login(loginRequest)
+      .subscribe((user) => this.router.navigate(['/home']));
   }
 }
