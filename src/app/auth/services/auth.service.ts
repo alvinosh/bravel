@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private readonly TOKEN = 'TOKEN';
-  private loggedUser: string;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -23,12 +22,20 @@ export class AuthService {
       .pipe(tap((data) => this.doLoginUser(data)));
   }
 
-  signup(user: User): Observable<void> {
-    return this.http.post<any>(`${environment.apiurl}/signup`, user);
+  signup(user: {
+    firstname: string;
+    lastname: string;
+    username: string;
+    email: string;
+    password: string;
+    confirmpassword: string;
+  }): Observable<User> {
+    return this.http
+      .post<any>(`${environment.apiurl}/signup`, user)
+      .pipe(tap((data) => this.doLoginUser(data)));
   }
 
   logout() {
-    this.loggedUser = null;
     localStorage.removeItem(this.TOKEN);
   }
 

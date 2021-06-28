@@ -25,3 +25,9 @@ h1 {
 .name > * + * {
   margin-left: 5px;
 }
+
+p {
+  margin-top: 5px;
+
+  color: $error;
+}

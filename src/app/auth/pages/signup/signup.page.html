@@ -1,5 +1,5 @@
 <app-background>
-  <app-form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <app-form [formGroup]="signupForm" (ngSubmit)="signup()">
     <h1>Signup</h1>
 
     <div class="name">
@@ -40,7 +40,9 @@
       formControlName="confirmpassword"
     ></app-text-input>
 
-    <app-button>Sign Up</app-button>
+    <p *ngFor="let error of errors">* {{error}}</p>
+
+    <app-button [disabled]="!signupForm.valid">Sign Up</app-button>
 
     <a href="./login">Already Have An Account?</a>
   </app-form>

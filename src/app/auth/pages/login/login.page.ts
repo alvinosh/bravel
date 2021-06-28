@@ -5,6 +5,9 @@ import { InputType } from 'src/app/shared/models/Input';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,6 +20,8 @@ export class LoginPage {
   });
 
   type = InputType;
+
+  errors: string[];
 
   constructor(
     private authService: AuthService,
@@ -34,8 +39,9 @@ export class LoginPage {
       password: this.f.password.value,
     };
 
-    this.authService
-      .login(loginRequest)
-      .subscribe((user) => this.router.navigate(['/home']));
+    this.authService.login(loginRequest).subscribe(
+      (data) => this.router.navigate(['/home']),
+      (error) => (this.errors = error.error.message.split('\n'))
+    );
   }
 }
