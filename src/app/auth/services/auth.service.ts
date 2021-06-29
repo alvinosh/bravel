@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/shared/models/User';
+import { User } from 'src/app/shared/models/DTOs/User';
 import { Router } from '@angular/router';
+import { Location } from 'src/app/shared/models/DTOs/Location';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,7 +30,9 @@ export class AuthService {
     email: string;
     password: string;
     confirmpassword: string;
+    location: Location;
   }): Observable<User> {
+    console.log(user);
     return this.http
       .post<any>(`${environment.apiurl}/signup`, user)
       .pipe(tap((data) => this.doLoginUser(data)));

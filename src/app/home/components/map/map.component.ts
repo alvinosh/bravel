@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Location } from 'src/app/shared/models/Location';
+import { Location } from 'src/app/shared/models/DTOs/Location';
 
 import { LocationService } from 'src/app/home/services/location.service';
 
@@ -11,25 +11,24 @@ import * as L from 'leaflet';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit {
   private map;
+
+  private loc: Location;
 
   constructor(private locationService: LocationService) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    this.locationService.getCoords().then((res: Location) => {
-      if (res) {
-        this.initMap(res.lat, res.lon);
-      }
+  ngOnInit() {
+    this.locationService.getGeopostion().subscribe((data) => {
+      this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
+      this.initMap(this.loc);
     });
   }
 
-  private initMap(x: number, y: number): void {
+  private initMap(loc: Location): void {
     this.map = L.map('map', {
       attributionControl: false,
-      center: [x, y],
+      center: [loc.lat, loc.lon],
       zoom: 15,
     });
 

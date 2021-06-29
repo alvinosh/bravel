@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/models/User';
+import { User } from 'src/app/shared/models/DTOs/User';
 
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 

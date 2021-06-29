@@ -8,8 +8,12 @@ import { AuthPageRoutingModule } from './auth-routing.module';
 
 import { AuthPage } from './auth.page';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationService } from 'src/app/home/services/location.service';
+
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, AuthPageRoutingModule],
   declarations: [AuthPage],
+  providers: [Geolocation, LocationService],
 })
 export class AuthPageModule {}

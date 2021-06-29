@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Color } from 'src/app/shared/models/Color';
-import { User } from 'src/app/shared/models/User';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({
   selector: 'app-online',
@@ -10,23 +10,11 @@ import { User } from 'src/app/shared/models/User';
 export class OnlineComponent implements OnInit {
   users: User[] = [];
 
-  constructor() {
-    for (let i = 0; i < 15; i++) {
-      let user: User = {
-        id: 5,
-        username: 'testest',
-        location: {
-          lon: 5,
-          lat: 5,
-        },
-        email: 'a',
-        firstname: 'a',
-        lastname: 'a',
-      };
+  constructor(private auth: AuthService) {}
 
-      this.users.push(user);
-    }
+  ngOnInit() {
+    this.auth.getCurrentUser().subscribe((data) => {
+      console.log(data);
+    });
   }
-
-  ngOnInit() {}
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'src/app/shared/models/Message';
+import { Message } from 'src/app/shared/models/DTOs/Message';
 
 @Component({
   selector: 'app-chat',
@@ -9,16 +9,6 @@ import { Message } from 'src/app/shared/models/Message';
 export class ChatComponent implements OnInit {
   messages: Message[] = [];
 
-  constructor() {
-    for (let i = 0; i < 10; i++) {
-      let msg: Message = {
-        author: 'bakely',
-        content: 'what ya doing there mf',
-        senderId: 4,
-      };
-
-      this.messages.push(msg);
-    }
-  }
+  constructor() {}
   ngOnInit() {}
 }

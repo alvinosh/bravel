@@ -41,7 +41,7 @@ export class LoginPage {
 
     this.authService.login(loginRequest).subscribe(
       (data) => this.router.navigate(['/home']),
-      (error) => (this.errors = error.error.message.split('\n'))
+      (error) => (this.errors = error.error.errors)
     );
   }
 }

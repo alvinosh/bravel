@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocationService } from 'src/app/home/services/location.service';
+import { Location } from 'src/app/shared/models/DTOs/Location';
 
 import { InputType } from 'src/app/shared/models/Input';
 import { AuthService } from '../../services/auth.service';
@@ -29,15 +31,22 @@ export class SignupPage {
 
   type = InputType;
 
+  loc: Location;
+
   get f() {
     return this.signupForm.controls;
   }
 
   constructor(
+    private locationService: LocationService,
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) {
+    this.locationService.getGeopostion().subscribe((data) => {
+      this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
+    });
+  }
 
   signup() {
     const signupRequest = {
@@ -47,11 +56,12 @@ export class SignupPage {
       email: this.f.email.value,
       password: this.f.password.value,
       confirmpassword: this.f.confirmpassword.value,
+      location: this.loc,
     };
 
     this.authService.signup(signupRequest).subscribe(
       (data) => this.router.navigate(['/home']),
-      (error) => (this.errors = error.error.message.split('\n'))
+      (error) => (this.errors = error.error.errors)
     );
   }
 }
