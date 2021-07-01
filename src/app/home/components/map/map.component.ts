@@ -5,6 +5,8 @@ import { Location } from 'src/app/shared/models/DTOs/Location';
 import { LocationService } from 'src/app/home/services/location.service';
 
 import * as L from 'leaflet';
+import { UsersService } from '../../services/users.service';
+import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({
   selector: 'app-map',
@@ -16,9 +18,14 @@ export class MapComponent implements OnInit {
 
   private loc: Location;
 
-  constructor(private locationService: LocationService) {}
+  constructor(
+    private locationService: LocationService,
+    private usersService: UsersService
+  ) {}
 
   ngOnInit() {
+    this.initMarkers();
+
     this.locationService.getGeopostion().subscribe((data) => {
       this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
       this.initMap(this.loc);
@@ -26,6 +33,24 @@ export class MapComponent implements OnInit {
   }
 
   private initMap(loc: Location): void {
+    var greenIcon = L.icon({
+      iconUrl: 'assets/leaf-green.png',
+      shadowUrl: 'assets/leaf-shadow.png',
+      iconSize: [38, 95], // size of the icon
+      shadowSize: [50, 64], // size of the shadow
+      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62], // the same for the shadow
+      popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+    });
+
+    this.usersService.getUsers().subscribe((data) => {
+      data.map((user: User) => {
+        L.marker([user.location.lat, user.location.lon], {
+          icon: greenIcon,
+        }).addTo(this.map);
+      });
+    });
+
     this.map = L.map('map', {
       attributionControl: false,
       center: [loc.lat, loc.lon],
@@ -42,4 +67,6 @@ export class MapComponent implements OnInit {
 
     tiles.addTo(this.map);
   }
+
+  private initMarkers(): void {}
 }

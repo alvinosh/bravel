@@ -21,6 +21,7 @@ import { MessageComponent } from './components/sidebar/components/chat/message/m
 import { MessageFormComponent } from './components/sidebar/components/chat/message-form/message-form.component';
 import { UserComponent } from './components/sidebar/components/online/user/user.component';
 import { GroupComponent } from './components/sidebar/components/chat/group/group.component';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,6 @@ import { GroupComponent } from './components/sidebar/components/chat/group/group
     HomePageRoutingModule,
     FontAwesomeModule,
   ],
-  providers: [Geolocation, LocationService],
+  providers: [Geolocation, LocationService, UsersService],
 })
 export class HomePageModule {}

@@ -32,7 +32,6 @@ export class AuthService {
     confirmpassword: string;
     location: Location;
   }): Observable<User> {
-    console.log(user);
     return this.http
       .post<any>(`${environment.apiurl}/signup`, user)
       .pipe(tap((data) => this.doLoginUser(data)));
