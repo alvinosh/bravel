@@ -6,17 +6,29 @@ import { environment } from 'src/environments/environment';
 
 import { of, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  // TODO : Find way to cache users
+
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getUsers(): Observable<User[]> {
+    let currentUser: User;
+
+    this.auth.getCurrentUser().subscribe((data) => {
+      currentUser = data;
+    });
     return this.http.get<any>(`${environment.apiurl}/users`).pipe(
       map((data) => {
-        return data.users!.map((user) => {
+        let users = data.users!.filter((user) => {
+          return user.username !== currentUser.username;
+        });
+
+        return users.map((user) => {
           return {
             email: user.email,
             username: user.username,

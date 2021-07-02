@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { UsersService } from 'src/app/home/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({
@@ -8,13 +9,19 @@ import { User } from 'src/app/shared/models/DTOs/User';
   styleUrls: ['./online.component.scss'],
 })
 export class OnlineComponent implements OnInit {
+  currentUser: User;
+
   users: User[] = [];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private usersService: UsersService) {}
 
   ngOnInit() {
     this.auth.getCurrentUser().subscribe((data) => {
-      console.log(data);
+      this.currentUser = data;
+    });
+
+    this.usersService.getUsers().subscribe((data) => {
+      this.users = data;
     });
   }
 }
