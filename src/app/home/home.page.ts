@@ -9,6 +9,8 @@ import { Page } from '../shared/models/Page';
 export class HomePage {
   currentPage: Page = Page.Back;
 
+  Page = Page;
+
   setPage(x: Page) {
     this.currentPage = x;
   }

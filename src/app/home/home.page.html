@@ -3,13 +3,11 @@
     <app-map></app-map>
   </div>
 
-  <div class="content">
-    <div class="sidebar">
-      <app-sidebar [page]="currentPage"></app-sidebar>
-    </div>
-
-    <div class="nav">
-      <app-navbar (pageChange)="setPage($event)"></app-navbar>
-    </div>
+  <div [class.tall]="currentPage !== Page.Back" class="content">
+    <app-sidebar
+      [class.hide]="currentPage === Page.Back"
+      [page]="currentPage"
+    ></app-sidebar>
+    <app-navbar (pageChange)="setPage($event)"></app-navbar>
   </div>
 </ion-content>

@@ -2,7 +2,6 @@
 
 .content {
   background: $color-2;
-  transition: all 0.2s ease-in-out;
 }
 
 * {
@@ -20,19 +19,11 @@ h1 {
     width: 30vw;
     height: 100%;
   }
-
-  .hide {
-    transform: translateX(100%);
-  }
 }
 
 @media only screen and (max-width: $break-point-1) {
   .content {
     width: 100%;
     height: 100%;
-  }
-
-  .hide {
-    transform: translateY(100%);
   }
 }
