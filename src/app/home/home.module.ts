@@ -9,6 +9,8 @@ import { MapComponent } from './components/map/map.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -21,7 +23,10 @@ import { MessageComponent } from './components/sidebar/components/chat/message/m
 import { MessageFormComponent } from './components/sidebar/components/chat/message-form/message-form.component';
 import { UserComponent } from './components/sidebar/components/online/user/user.component';
 import { GroupComponent } from './components/sidebar/components/chat/group/group.component';
-import { UsersService } from './services/users.service';
+import { UsersService } from '../core/services/users.service';
+import { SocketioService } from '../core/services/socketio.service';
+
+const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 @NgModule({
   declarations: [
@@ -44,7 +49,8 @@ import { UsersService } from './services/users.service';
     IonicModule,
     HomePageRoutingModule,
     FontAwesomeModule,
+    SocketIoModule.forRoot(config),
   ],
-  providers: [Geolocation, LocationService, UsersService],
+  providers: [Geolocation, LocationService, UsersService, SocketioService],
 })
 export class HomePageModule {}

@@ -5,7 +5,7 @@ import { Location } from 'src/app/shared/models/DTOs/Location';
 import { LocationService } from 'src/app/home/services/location.service';
 
 import * as L from 'leaflet';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({

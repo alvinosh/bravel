@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketioService } from '../core/services/socketio.service';
 import { Page } from '../shared/models/Page';
 
 @Component({
@@ -15,5 +16,5 @@ export class HomePage {
     this.currentPage = x;
   }
 
-  constructor() {}
+  constructor(private socket: SocketioService) {}
 }

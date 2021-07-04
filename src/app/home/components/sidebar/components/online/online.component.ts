@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { UsersService } from 'src/app/home/services/users.service';
+import { UsersService } from 'src/app/core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({
