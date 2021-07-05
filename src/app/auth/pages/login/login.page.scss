@@ -4,6 +4,18 @@ a {
   margin: 10px auto;
 }
 
+@media only screen and (min-width: $break-point-2) {
+  app-form {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: $break-point-2) {
+  app-form {
+    width: 95%;
+  }
+}
+
 app-button {
   margin: 10px auto;
 }

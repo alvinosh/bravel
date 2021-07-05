@@ -16,5 +16,5 @@ export class HomePage {
     this.currentPage = x;
   }
 
-  constructor(private socket: SocketioService) {}
+  constructor() {}
 }

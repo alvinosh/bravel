@@ -5,9 +5,6 @@ import { InputType } from 'src/app/shared/models/Input';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',

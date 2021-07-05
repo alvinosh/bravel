@@ -1,4 +1,16 @@
-* {
-  margin: 0;
-  padding: 0;
+@import "/src/theme/variables.scss";
+
+app-form {
+  width: 95%;
+}
+
+app-button {
+  margin: 10px auto;
+}
+
+h1 {
+  color: $color-3;
+
+  margin: 0px auto;
+  padding: 10px;
 }

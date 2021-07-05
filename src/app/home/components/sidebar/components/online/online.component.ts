@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { SocketioService } from 'src/app/core/services/socketio.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 
@@ -9,17 +10,11 @@ import { User } from 'src/app/shared/models/DTOs/User';
   styleUrls: ['./online.component.scss'],
 })
 export class OnlineComponent implements OnInit {
-  currentUser: User;
-
   users: User[] = [];
 
-  constructor(private auth: AuthService, private usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit() {
-    this.auth.getCurrentUser().subscribe((data) => {
-      this.currentUser = data;
-    });
-
     this.usersService.getUsers().subscribe((data) => {
       this.users = data;
     });

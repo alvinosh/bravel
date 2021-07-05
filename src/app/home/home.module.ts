@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MapComponent } from './components/map/map.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
@@ -26,7 +24,9 @@ import { GroupComponent } from './components/sidebar/components/chat/group/group
 import { UsersService } from '../core/services/users.service';
 import { SocketioService } from '../core/services/socketio.service';
 
-const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
+import { FormComponent } from 'src/app/shared/components/form-elements/form/form.component';
+import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
+import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,9 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     UserComponent,
     HomePage,
     GroupComponent,
+    FormComponent,
+    TextInputComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +52,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     IonicModule,
     HomePageRoutingModule,
     FontAwesomeModule,
-    SocketIoModule.forRoot(config),
+    ReactiveFormsModule,
   ],
   providers: [Geolocation, LocationService, UsersService, SocketioService],
 })

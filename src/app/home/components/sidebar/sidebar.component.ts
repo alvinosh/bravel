@@ -16,7 +16,5 @@ export class SidebarComponent {
     return x === this.page;
   }
 
-  constructor(socket: SocketioService) {
-    socket.sendMessage('aa');
-  }
+  constructor() {}
 }

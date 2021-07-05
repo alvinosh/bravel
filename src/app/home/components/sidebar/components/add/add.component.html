@@ -1,3 +1,13 @@
-<p>
-  add works!
-</p>
+<app-form [formGroup]="createForm" (ngSubmit)="create()">
+  <h1>Create Room</h1>
+
+  <app-text-input
+    [type]="type.Text"
+    label="Room Name"
+    formControlName="name"
+  ></app-text-input>
+
+  <p *ngFor="let error of errors">* {{ error }}</p>
+
+  <app-button [disabled]="!createForm.valid">Create</app-button>
+</app-form>

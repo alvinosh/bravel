@@ -37,12 +37,8 @@ export class AuthService {
       .pipe(tap((data) => this.doLoginUser(data)));
   }
 
-  logout() {
-    localStorage.removeItem(this.TOKEN);
-  }
-
   logoutAndRedirect() {
-    this.logout();
+    this.doLogoutUser();
     this.router.navigate(['/login']);
   }
 
