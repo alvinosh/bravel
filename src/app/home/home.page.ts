@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { SocketioService } from '../core/services/socketio.service';
 import { Page } from '../shared/models/Page';
@@ -17,7 +18,18 @@ export class HomePage {
     this.currentPage = x;
   }
 
-  constructor(private socket: SocketioService, private auth: AuthService) {
-    this.socket.join(auth.getToken());
+  constructor(
+    private socket: SocketioService,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        if (ev.url === '/home') {
+          console.log('join socket');
+          this.socket.join(this.auth.getToken());
+        }
+      }
+    });
   }
 }

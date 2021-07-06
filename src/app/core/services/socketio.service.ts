@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +16,7 @@ export class SocketioService {
     this.socket.emit('logout', token);
   }
 
-  sendMessage(msg: string) {
-    this.socket.emit('message', msg);
+  userChange(): Observable<any> {
+    return this.socket.fromEvent('user-change');
   }
 }

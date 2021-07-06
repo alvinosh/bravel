@@ -4,41 +4,48 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { environment } from 'src/environments/environment';
 
-import { of, Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { ApiHttpService } from './api-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  user: User;
+  currentUser: User;
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  onlineUsers: User[];
+
+  constructor(private api: ApiHttpService, private auth: AuthService) {
     this.auth.getCurrentUser().subscribe((data) => {
-      this.user = data;
+      this.currentUser = data;
     });
   }
 
   getCurrentUser(): User {
-    return this.user;
+    return this.currentUser;
+  }
+
+  formatData(data: any): User {
+    return {
+      email: data.email,
+      username: data.username,
+      firstname: data.first_name,
+      lastname: data.last_name,
+      online: data.online,
+      location: {
+        lat: data.location.lat,
+        lon: data.location.lon,
+      },
+    };
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<any>(`${environment.apiurl}/users`).pipe(
+    return this.api.get(this.api.createUrl('users')).pipe(
       map((data) => {
         return data.users.map((user) => {
-          return {
-            email: user.email,
-            username: user.username,
-            firstname: user.first_name,
-            lastname: user.last_name,
-            online: user.online,
-            location: {
-              lat: user.location.lat,
-              lon: user.location.lon,
-            },
-          };
+          return this.formatData(user);
         });
       })
     );

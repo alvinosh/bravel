@@ -17,6 +17,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { FormComponent } from './shared/components/form-elements/form/form.component';
 import { TextInputComponent } from './shared/components/form-elements/text-input/text-input.component';
 import { ButtonComponent } from './shared/components/form-elements/button/button.component';
+import { ApiHttpService } from './core/services/api-http.service';
+import { Constants } from './core/constants';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -36,6 +38,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
   providers: [
     AuthGuard,
     HomeGuard,
+    ApiHttpService,
+    Constants,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

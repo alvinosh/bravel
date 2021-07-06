@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { SocketioService } from 'src/app/core/services/socketio.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
@@ -12,11 +11,28 @@ import { User } from 'src/app/shared/models/DTOs/User';
 export class OnlineComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private usersService: UsersService) {}
+  currentUser: User;
+
+  constructor(
+    private usersService: UsersService,
+    private socket: SocketioService
+  ) {
+    this.socket.userChange().subscribe((data) => {
+      this.getUsers();
+    });
+  }
 
   ngOnInit() {
+    this.currentUser = this.usersService.getCurrentUser();
+    this.getUsers();
+  }
+
+  getUsers() {
     this.usersService.getUsers().subscribe((data) => {
       this.users = data;
+      this.users = this.users.filter((user) => {
+        return this.currentUser.username !== user.username;
+      });
     });
   }
 }

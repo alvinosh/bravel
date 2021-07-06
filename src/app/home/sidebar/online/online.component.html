@@ -1,5 +1,15 @@
 <div class="container">
-  <div class="users">
-    <app-user *ngFor="let user of users" [user]="user"></app-user>
-  </div>
+  <h1 *ngIf="users.length < 1; else usersblock" class="noUsers">
+    There Are No Online Users Right Now
+  </h1>
+
+  <ng-template #usersblock>
+    <div class="users">
+      <app-user
+        *ngFor="let user of users"
+        [user]="user"
+        [currentUser]="currentUser"
+      ></app-user>
+    </div>
+  </ng-template>
 </div>

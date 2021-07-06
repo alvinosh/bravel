@@ -21,6 +21,13 @@
   overflow-y: scroll;
 }
 
+h1 {
+  padding: 30px 20px;
+  margin: auto;
+  text-align: center;
+  color: $color-1;
+}
+
 * {
   scrollbar-color: $other-1 $color-2;
 }
