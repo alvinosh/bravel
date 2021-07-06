@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth/services/auth.service';
 import { SocketioService } from '../core/services/socketio.service';
 import { Page } from '../shared/models/Page';
 
@@ -16,5 +17,7 @@ export class HomePage {
     this.currentPage = x;
   }
 
-  constructor() {}
+  constructor(private socket: SocketioService, private auth: AuthService) {
+    this.socket.join(auth.getToken());
+  }
 }

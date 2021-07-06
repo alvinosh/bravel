@@ -6,13 +6,18 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { Router } from '@angular/router';
 import { Location } from 'src/app/shared/models/DTOs/Location';
+import { SocketioService } from 'src/app/core/services/socketio.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly TOKEN = 'TOKEN';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private socket: SocketioService
+  ) {}
 
   login(loginRequest: {
     username: string;
@@ -47,6 +52,7 @@ export class AuthService {
   }
 
   doLogoutUser(): void {
+    this.socket.logout(this.getToken());
     localStorage.removeItem(this.TOKEN);
   }
 

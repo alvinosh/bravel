@@ -5,28 +5,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { MapComponent } from './components/map/map.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MapComponent } from './map/map.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocationService } from 'src/app/home/services/location.service';
-import { ChatComponent } from './components/sidebar/components/chat/chat.component';
-import { OnlineComponent } from './components/sidebar/components/online/online.component';
-import { AddComponent } from './components/sidebar/components/add/add.component';
-import { SettingsComponent } from './components/sidebar/components/settings/settings.component';
-import { MessageComponent } from './components/sidebar/components/chat/message/message.component';
-import { MessageFormComponent } from './components/sidebar/components/chat/message-form/message-form.component';
-import { UserComponent } from './components/sidebar/components/online/user/user.component';
-import { GroupComponent } from './components/sidebar/components/chat/group/group.component';
-import { UsersService } from '../core/services/users.service';
-import { SocketioService } from '../core/services/socketio.service';
+import { ChatComponent } from './sidebar/chat/chat.component';
+import { OnlineComponent } from './sidebar/online/online.component';
+import { AddComponent } from './sidebar/add/add.component';
+import { SettingsComponent } from './sidebar/settings/settings.component';
+import { MessageComponent } from './sidebar/chat/message/message.component';
+import { MessageFormComponent } from './sidebar/chat/message-form/message-form.component';
+import { UserComponent } from './sidebar/online/user/user.component';
+import { GroupComponent } from './sidebar/chat/group/group.component';
 
-import { FormComponent } from 'src/app/shared/components/form-elements/form/form.component';
-import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
-import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -42,9 +38,6 @@ import { ButtonComponent } from 'src/app/shared/components/form-elements/button/
     UserComponent,
     HomePage,
     GroupComponent,
-    FormComponent,
-    TextInputComponent,
-    ButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +46,9 @@ import { ButtonComponent } from 'src/app/shared/components/form-elements/button/
     HomePageRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    CoreModule,
+    SharedModule,
   ],
-  providers: [Geolocation, LocationService, UsersService, SocketioService],
+  providers: [Geolocation],
 })
 export class HomePageModule {}

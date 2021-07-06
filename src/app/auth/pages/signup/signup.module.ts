@@ -7,11 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
-
-import { FormComponent } from 'src/app/shared/components/form-elements/form/form.component';
-import { BackgroundComponent } from 'src/app/shared/components/background/background.component';
-import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
-import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -20,13 +16,8 @@ import { ButtonComponent } from 'src/app/shared/components/form-elements/button/
     ReactiveFormsModule,
     IonicModule,
     SignupPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [
-    SignupPage,
-    FormComponent,
-    BackgroundComponent,
-    TextInputComponent,
-    ButtonComponent,
-  ],
+  declarations: [SignupPage],
 })
 export class SignupPageModule {}

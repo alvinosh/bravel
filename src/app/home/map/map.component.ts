@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { Location } from 'src/app/shared/models/DTOs/Location';
 
-import { LocationService } from 'src/app/home/services/location.service';
+import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
-import { UsersService } from '../../../core/services/users.service';
+import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 
 @Component({

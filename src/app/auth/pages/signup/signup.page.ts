@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocationService } from 'src/app/home/services/location.service';
+import { LocationService } from 'src/app/core/services/location.service';
 import { Location } from 'src/app/shared/models/DTOs/Location';
 
 import { InputType } from 'src/app/shared/models/Input';

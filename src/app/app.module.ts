@@ -14,6 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { HomeGuard } from './auth/guards/home.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { FormComponent } from './shared/components/form-elements/form/form.component';
+import { TextInputComponent } from './shared/components/form-elements/text-input/text-input.component';
+import { ButtonComponent } from './shared/components/form-elements/button/button.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -23,12 +26,13 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
   imports: [
     ReactiveFormsModule,
     BrowserModule,
-    IonicModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
+    IonicModule.forRoot(),
     SocketIoModule.forRoot(config),
   ],
+
   providers: [
     AuthGuard,
     HomeGuard,

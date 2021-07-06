@@ -7,12 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
-
-import { FormComponent } from 'src/app/shared/components/form-elements/form/form.component';
-import { BackgroundComponent } from 'src/app/shared/components/background/background.component';
-import { TextInputComponent } from 'src/app/shared/components/form-elements/text-input/text-input.component';
-import { ButtonComponent } from 'src/app/shared/components/form-elements/button/button.component';
 import { AuthService } from '../../services/auth.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -22,14 +18,9 @@ import { AuthService } from '../../services/auth.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
   ],
-  declarations: [
-    LoginPage,
-    BackgroundComponent,
-    FormComponent,
-    TextInputComponent,
-    ButtonComponent,
-  ],
+  declarations: [LoginPage],
   providers: [AuthService],
 })
 export class LoginPageModule {}
