@@ -41,12 +41,16 @@ export class UsersService {
     };
   }
 
-  getUsers(): Observable<User[]> {
+  getUsers(withCurrent: boolean = false): Observable<User[]> {
     return this.api.get(this.api.createUrl('users')).pipe(
       map((data) => {
-        return data.users.map((user) => {
-          return this.formatData(user);
-        });
+        return data.users
+          .map((user) => {
+            return this.formatData(user);
+          })
+          .filter((user) => {
+            return this.currentUser.username !== user.username && !withCurrent;
+          });
       })
     );
   }

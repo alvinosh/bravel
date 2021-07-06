@@ -30,9 +30,6 @@ export class OnlineComponent implements OnInit {
   getUsers() {
     this.usersService.getUsers().subscribe((data) => {
       this.users = data;
-      this.users = this.users.filter((user) => {
-        return this.currentUser.username !== user.username;
-      });
     });
   }
 }
