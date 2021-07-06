@@ -23,12 +23,11 @@ export class MapComponent implements OnInit {
     private usersService: UsersService
   ) {}
 
-  ngOnInit() {
-    this.locationService.getGeopostion().subscribe((data) => {
-      this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
-      this.initMap(this.loc);
-      this.initMarkers();
-    });
+  async ngOnInit() {
+    let data = await this.locationService.getGeopostion();
+    this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
+    this.initMap(this.loc);
+    this.initMarkers();
   }
 
   private initMap(loc: Location): void {

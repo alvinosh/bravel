@@ -43,7 +43,7 @@ export class SignupPage {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.locationService.getGeopostion().subscribe((data) => {
+    let data = this.locationService.getGeopostion().then((data) => {
       this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
     });
   }

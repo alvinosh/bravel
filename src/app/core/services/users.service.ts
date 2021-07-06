@@ -12,7 +12,17 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  user: User;
+
+  constructor(private http: HttpClient, private auth: AuthService) {
+    this.auth.getCurrentUser().subscribe((data) => {
+      this.user = data;
+    });
+  }
+
+  getCurrentUser(): User {
+    return this.user;
+  }
 
   getUsers(): Observable<User[]> {
     return this.http.get<any>(`${environment.apiurl}/users`).pipe(
