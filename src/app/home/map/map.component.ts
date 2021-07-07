@@ -6,8 +6,6 @@ import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
-import { User } from 'src/app/shared/models/DTOs/User';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -16,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class MapComponent implements OnInit {
   private map;
-
+  private markers;
   private loc: Location;
 
   constructor(
@@ -32,10 +30,13 @@ export class MapComponent implements OnInit {
   }
 
   private initMap(loc: Location): void {
+    this.markers = new L.LayerGroup();
+
     this.map = L.map('map', {
       attributionControl: false,
       center: [loc.lat, loc.lon],
       zoom: 15,
+      layers: [this.markers],
     });
 
     const tiles = L.tileLayer(
@@ -51,21 +52,22 @@ export class MapComponent implements OnInit {
 
   private initMarkers(): void {
     var greenIcon = L.icon({
-      iconUrl: 'assets/leaf-green.png',
-      shadowUrl: 'assets/leaf-shadow.png',
-      iconSize: [38, 95], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62], // the same for the shadow
-      popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+      iconUrl: 'assets/user.png',
+      // shadowUrl: 'assets/leaf-shadow.png',
+      iconSize: [30, 30], // size of the icon
+      iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
+      // shadowSize: [50, 64], // size of the shadow
+      // shadowAnchor: [4, 62], // the same for the shadow
+      // popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
     });
 
-    // this.usersService.getUsers().subscribe((data) => {
-    //   data.forEach((user) => {
-    //     L.marker([user.location.lat, user.location.lon], {
-    //       icon: greenIcon,
-    //     }).addTo(this.map);
-    //   });
-    // });
+    this.usersService.getUsers().subscribe((data) => {
+      this.markers.clearLayers();
+      data.forEach((user) => {
+        L.marker([user.location.lat, user.location.lon], {
+          icon: greenIcon,
+        }).addTo(this.markers);
+      });
+    });
   }
 }
