@@ -7,6 +7,7 @@ import { LocationService } from 'src/app/core/services/location.service';
 import * as L from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -59,12 +60,12 @@ export class MapComponent implements OnInit {
       popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
     });
 
-    this.usersService.getUsers().subscribe((data) => {
-      data.map((user: User) => {
-        L.marker([user.location.lat, user.location.lon], {
-          icon: greenIcon,
-        }).addTo(this.map);
-      });
-    });
+    // this.usersService.getUsers().subscribe((data) => {
+    //   data.forEach((user) => {
+    //     L.marker([user.location.lat, user.location.lon], {
+    //       icon: greenIcon,
+    //     }).addTo(this.map);
+    //   });
+    // });
   }
 }

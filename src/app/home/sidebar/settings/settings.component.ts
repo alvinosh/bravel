@@ -9,16 +9,14 @@ import { User } from 'src/app/shared/models/DTOs/User';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
-  user: User;
-
+export class SettingsComponent {
   constructor(
     private usersService: UsersService,
     private authService: AuthService
   ) {}
 
-  ngOnInit() {
-    this.user = this.usersService.getCurrentUser();
+  getUser(): User {
+    return this.usersService.getCurrentUser();
   }
 
   logout() {

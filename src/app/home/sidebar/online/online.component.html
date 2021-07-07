@@ -8,7 +8,7 @@
       <app-user
         *ngFor="let user of users"
         [user]="user"
-        [currentUser]="currentUser"
+        [currentUser]="getUser()"
       ></app-user>
     </div>
   </ng-template>

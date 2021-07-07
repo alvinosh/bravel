@@ -10,17 +10,15 @@ import { AuthService } from '../services/auth.service';
 export class HomeGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): Observable<boolean> {
+  canActivate(): boolean {
     return this.canLoad();
   }
 
-  canLoad(): Observable<boolean> {
-    return this.authService.isLoggedIn().pipe(
-      tap((isLoggedIn) => {
-        if (!isLoggedIn) {
-          this.router.navigate(['/login']);
-        }
-      })
-    );
+  canLoad(): boolean {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
   }
 }

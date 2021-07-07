@@ -26,7 +26,6 @@ export class HomePage {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         if (ev.url === '/home') {
-          console.log('join socket');
           this.socket.join(this.auth.getToken());
         }
       }

@@ -57,14 +57,14 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN);
   }
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUser(): User {
     const token = this.getToken();
     if (token) {
       const encodedPayload = token.split('.')[1];
       const payload = window.atob(encodedPayload);
-      return of(JSON.parse(payload));
+      return JSON.parse(payload);
     } else {
-      return of(undefined);
+      return undefined;
     }
   }
 
@@ -72,10 +72,7 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN);
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.getCurrentUser().pipe(
-      map((user) => !!user),
-      catchError(() => of(false))
-    );
+  isLoggedIn(): boolean {
+    return !!this.getCurrentUser();
   }
 }
