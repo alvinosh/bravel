@@ -19,6 +19,7 @@ import { TextInputComponent } from './shared/components/form-elements/text-input
 import { ButtonComponent } from './shared/components/form-elements/button/button.component';
 import { ApiHttpService } from './core/services/api-http.service';
 import { Constants } from './core/constants';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -33,6 +34,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     HttpClientModule,
     IonicModule.forRoot(),
     SocketIoModule.forRoot(config),
+    BrowserAnimationsModule,
   ],
 
   providers: [

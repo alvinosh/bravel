@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BackgroundComponent } from './components/background/background.component';
-import { FormComponent } from './components/form-elements/form/form.component';
-import { TextInputComponent } from './components/form-elements/text-input/text-input.component';
-import { ButtonComponent } from './components/form-elements/button/button.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BackgroundComponent} from './components/background/background.component';
+import {FormComponent} from './components/form-elements/form/form.component';
+import {TextInputComponent} from './components/form-elements/text-input/text-input.component';
+import {ButtonComponent} from './components/form-elements/button/button.component';
+import {MaterialModule} from "./material.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ButtonComponent } from './components/form-elements/button/button.compon
     TextInputComponent,
     ButtonComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule
+    , MaterialModule],
   exports: [
     BackgroundComponent,
     FormComponent,
@@ -20,4 +22,5 @@ import { ButtonComponent } from './components/form-elements/button/button.compon
     ButtonComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

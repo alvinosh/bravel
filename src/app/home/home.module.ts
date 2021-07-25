@@ -23,6 +23,7 @@ import { GroupComponent } from './sidebar/chat/group/group.component';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import {MaterialModule} from "../shared/material.module";
 
 @NgModule({
   declarations: [
@@ -39,16 +40,17 @@ import { SharedModule } from '../shared/shared.module';
     HomePage,
     GroupComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    FontAwesomeModule,
-    ReactiveFormsModule,
-    CoreModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        CoreModule,
+        SharedModule,
+        MaterialModule,
+    ],
   providers: [Geolocation],
 })
 export class HomePageModule {}
