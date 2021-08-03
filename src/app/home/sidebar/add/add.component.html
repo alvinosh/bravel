@@ -8,7 +8,7 @@
   ></app-text-input>
 
   <mat-form-field appearance="fill">
-    <mat-label>Toppings</mat-label>
+    <mat-label>Users</mat-label>
     <mat-select formControlName="users" multiple>
       <mat-option *ngFor="let user of userList" [value]="user">{{
         user
@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Toppings</mat-label>
+    <mat-label>Admins</mat-label>
     <mat-select formControlName="admins" multiple>
       <mat-option *ngFor="let user of f.users.value" [value]="user">{{
         user
