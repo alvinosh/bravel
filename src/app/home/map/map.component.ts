@@ -51,21 +51,23 @@ export class MapComponent implements OnInit {
   }
 
   private initMarkers(): void {
-    var greenIcon = L.icon({
+    let icon = L.icon({
       iconUrl: 'assets/user.png',
-      // shadowUrl: 'assets/leaf-shadow.png',
       iconSize: [30, 30], // size of the icon
       iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
-      // shadowSize: [50, 64], // size of the shadow
-      // shadowAnchor: [4, 62], // the same for the shadow
-      // popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+    });
+
+    let c_icon = L.icon({
+      iconUrl: 'assets/c_user.png',
+      iconSize: [30, 30], // size of the icon
+      iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
     });
 
     this.usersService.getUsers().subscribe((data) => {
       this.markers.clearLayers();
       data.forEach((user) => {
         L.marker([user.location.lat, user.location.lon], {
-          icon: greenIcon,
+          icon: this.usersService.isCurrentUser(user) ? c_icon : icon,
         }).addTo(this.markers);
       });
     });

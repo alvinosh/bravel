@@ -1,4 +1,4 @@
-<app-form [formGroup]="createForm" (ngSubmit)="create()">
+<app-form [formGroup]="createForm" (ngSubmit)="getSelectedList()">
   <h1>Create Room</h1>
 
   <app-text-input
@@ -6,21 +6,25 @@
     label="Room Name"
     formControlName="name"
   ></app-text-input>
-  <mat-form-field class="example-chip-list" appearance="fill">
-    <mat-label>Favorite Fruits</mat-label>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(fruit)">
-        {{fruit.name}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input placeholder="New fruit..."
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Toppings</mat-label>
+    <mat-select formControlName="users" multiple>
+      <mat-option *ngFor="let user of userList" [value]="user">{{
+        user
+      }}</mat-option>
+    </mat-select>
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Toppings</mat-label>
+    <mat-select formControlName="admins" multiple>
+      <mat-option *ngFor="let user of f.users.value" [value]="user">{{
+        user
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <p *ngFor="let error of errors">* {{ error }}</p>
 
   <app-button [disabled]="!createForm.valid">Create</app-button>

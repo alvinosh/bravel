@@ -13,8 +13,6 @@ import { faUserLock } from '@fortawesome/free-solid-svg-icons';
   providedIn: 'root',
 })
 export class UsersService {
-  onlineUsers: User[] = [];
-
   usersSubject: BehaviorSubject<User[]>;
 
   constructor(
@@ -22,10 +20,11 @@ export class UsersService {
     private auth: AuthService,
     private socket: SocketioService
   ) {
-    this.usersSubject = new BehaviorSubject<User[]>(this.loadUsers());
+    this.usersSubject = new BehaviorSubject<User[]>(null);
+    this.loadUsers(true);
 
     this.socket.userChange().subscribe((data) => {
-      this.updateUser(data.username);
+      this.loadUsers();
     });
   }
 
@@ -33,47 +32,22 @@ export class UsersService {
     return this.auth.getCurrentUser();
   }
 
+  isCurrentUser(other: User): boolean {
+    return this.getCurrentUser().username === other.username;
+  }
+
   getUsers(): BehaviorSubject<User[]> {
     return this.usersSubject;
   }
 
-  updateUser(username: string) {
-    this.api
-      .get(this.api.createUrlWithPathVariables('user', [username]))
-      .subscribe((data) => {
-        let u = this.formatData(data.user);
-
-        this.onlineUsers = this.onlineUsers.filter((data) => {
-          return data.username !== u.username;
-        });
-
-        if (u.online) {
-          if (this.getCurrentUser()) {
-            if (u.username !== this.getCurrentUser().username) {
-              this.onlineUsers.push(u);
-            }
-          } else {
-            this.onlineUsers.push(u);
-          }
-        }
-
-        this.usersSubject.next(this.onlineUsers);
-      });
-  }
-
-  loadUsers(withCurrent: boolean = false): User[] {
+  loadUsers(withCurrent: boolean = false) {
     this.api.get(this.api.createUrl('users')).subscribe((data) => {
-      this.onlineUsers = data.users
-        .map((user) => {
-          return this.formatData(user);
-        })
-        .filter((user) => {
-          return (
-            this.getCurrentUser().username !== user.username && !withCurrent
-          );
-        });
+      let onlineUsers: User[] = data.users.map((user) => {
+        return this.formatData(user);
+      });
+
+      this.usersSubject.next(onlineUsers);
     });
-    return this.onlineUsers;
   }
 
   formatData(data: any): User {
