@@ -19,4 +19,8 @@ export class SocketioService {
   userChange(): Observable<any> {
     return this.socket.fromEvent('user-change');
   }
+
+  roomChange(): Observable<any> {
+    return this.socket.fromEvent('room-change');
+  }
 }

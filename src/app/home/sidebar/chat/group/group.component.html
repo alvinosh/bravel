@@ -1,8 +1,6 @@
 <div class="container">
   <select name="" id="">
-    <option value="one">first</option>
-    <option value="one">second</option>
-    <option value="one">third</option>
+    <option *ngFor="let room of roomList" [value]="one">{{ room }}</option>
   </select>
   <button><fa-icon [icon]="faCog"></fa-icon></button>
 </div>
