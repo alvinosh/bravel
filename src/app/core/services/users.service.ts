@@ -21,7 +21,6 @@ export class UsersService {
     private socket: SocketioService
   ) {
     this.usersSubject = new BehaviorSubject<User[]>(null);
-    this.loadUsers(true);
 
     this.socket.userChange().subscribe((data) => {
       this.loadUsers();
@@ -37,7 +36,7 @@ export class UsersService {
   }
 
   getUsers(): BehaviorSubject<User[]> {
-    return this.usersSubject;
+    if (this.usersSubject) return this.usersSubject;
   }
 
   loadUsers(withCurrent: boolean = false) {
