@@ -1,24 +1,29 @@
-<app-form [formGroup]="createForm" (ngSubmit)="getSelectedList()">
+<app-form [formGroup]="createForm" (ngSubmit)="createRoom()">
   <h1>Create Room</h1>
 
-  <app-text-input
-    [type]="type.Text"
-    label="Room Name"
-    formControlName="name"
-  ></app-text-input>
+  <mat-form-field>
+    <mat-label>Room Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field>
     <mat-label>Users</mat-label>
     <mat-select formControlName="users" multiple>
+      <mat-option disabled *ngIf="userList.length === 0"
+        >No Online Users</mat-option
+      >
       <mat-option *ngFor="let user of userList" [value]="user">{{
         user
       }}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field>
     <mat-label>Admins</mat-label>
     <mat-select formControlName="admins" multiple>
+      <mat-option disabled *ngIf="f.users.value.length === 0"
+        >No Selected Users</mat-option
+      >
       <mat-option *ngFor="let user of f.users.value" [value]="user">{{
         user
       }}</mat-option>

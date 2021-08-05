@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from 'src/app/shared/models/DTOs/User';
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ApiHttpService } from './api-http.service';
 import { SocketioService } from './socketio.service';
@@ -21,6 +21,7 @@ export class UsersService {
     private socket: SocketioService
   ) {
     this.usersSubject = new BehaviorSubject<User[]>(null);
+    this.loadUsers();
 
     this.socket.userChange().subscribe((data) => {
       this.loadUsers();
@@ -44,6 +45,8 @@ export class UsersService {
       let onlineUsers: User[] = data.users.map((user) => {
         return this.formatData(user);
       });
+
+      return onlineUsers;
 
       this.usersSubject.next(onlineUsers);
     });

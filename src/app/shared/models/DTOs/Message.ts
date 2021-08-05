@@ -1,8 +1,8 @@
-import { Channel } from './Channel';
+import { Room } from './Room';
 import { User } from './User';
 
 export interface Message {
   sender: User;
-  channel: Channel;
+  room: Room;
   content: string;
 }
