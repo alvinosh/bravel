@@ -20,9 +20,9 @@ export class AddComponent implements OnInit {
     admins: [''],
   });
 
-  userList: string[];
+  userList: string[] = [];
 
-  errors: string[];
+  errors: string[] = [];
 
   get f() {
     return this.createForm.controls;
@@ -43,10 +43,12 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.usersService.usersSubject.subscribe((data) => {
-      this.userList = data.map((user) => user.username);
-      this.userList = this.userList.filter((user) => {
-        return this.usersService.getCurrentUser().username !== user;
-      });
+      if (data) {
+        this.userList = data.map((user) => user.username);
+        this.userList = this.userList.filter((user) => {
+          return this.usersService.getCurrentUser().username !== user;
+        });
+      }
     });
   }
 

@@ -46,8 +46,6 @@ export class UsersService {
         return this.formatData(user);
       });
 
-      return onlineUsers;
-
       this.usersSubject.next(onlineUsers);
     });
   }

@@ -65,11 +65,13 @@ export class MapComponent implements OnInit {
 
     this.usersService.getUsers().subscribe((data) => {
       this.markers.clearLayers();
-      data.forEach((user) => {
-        L.marker([user.location.lat, user.location.lon], {
-          icon: this.usersService.isCurrentUser(user) ? c_icon : icon,
-        }).addTo(this.markers);
-      });
+      if (data) {
+        data.forEach((user) => {
+          L.marker([user.location.lat, user.location.lon], {
+            icon: this.usersService.isCurrentUser(user) ? c_icon : icon,
+          }).addTo(this.markers);
+        });
+      }
     });
   }
 }

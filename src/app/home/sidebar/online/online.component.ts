@@ -11,15 +11,15 @@ import { User } from 'src/app/shared/models/DTOs/User';
 export class OnlineComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private usersService: UsersService) {
-    this.usersService.usersSubject.subscribe((data) => {
-      this.users = data;
-    });
-  }
+  constructor(private usersService: UsersService) {}
 
   getUser(): User {
     return this.usersService.getCurrentUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usersService.usersSubject.subscribe((data) => {
+      if (data) this.users = data;
+    });
+  }
 }
