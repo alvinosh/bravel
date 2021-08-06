@@ -7,6 +7,7 @@
     <div class="users">
       <app-user
         *ngFor="let user of users"
+        (click)="panEvent(user)"
         [user]="user"
         [currentUser]="getUser()"
       ></app-user>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SocketioService } from 'src/app/core/services/socketio.service';
+import { User } from 'src/app/shared/models/DTOs/User';
 import { Page } from 'src/app/shared/models/Page';
 
 @Component({
@@ -10,11 +11,16 @@ import { Page } from 'src/app/shared/models/Page';
 export class SidebarComponent {
   @Input() page: Page = Page.Back;
   @Output() pageChange = new EventEmitter<Page>();
+  @Output() userPanEvent = new EventEmitter<User>();
 
   Page = Page;
 
   isPage(x: Page): boolean {
     return x === this.page;
+  }
+
+  panEvent(user: User) {
+    this.userPanEvent.emit(user);
   }
 
   changePage(page: Page) {

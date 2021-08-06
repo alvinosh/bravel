@@ -1,6 +1,8 @@
 <div class="content">
   <app-chat *ngIf="page === Page.Chat">Chat</app-chat>
-  <app-online *ngIf="page === Page.Online">Online</app-online>
+  <app-online (userPanEvent)="panEvent($event)" *ngIf="page === Page.Online"
+    >Online</app-online
+  >
   <app-settings *ngIf="page === Page.Settings">Settings</app-settings>
   <app-add (pageEvent)="changePage($event)" *ngIf="page === Page.Add"
     >Add</app-add

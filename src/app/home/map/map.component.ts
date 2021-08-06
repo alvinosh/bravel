@@ -6,6 +6,8 @@ import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
+import { User } from 'src/app/shared/models/DTOs/User';
+import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-map',
@@ -16,6 +18,8 @@ export class MapComponent implements OnInit {
   private map;
   private markers;
   private loc: Location;
+
+  private panZoom = 15;
 
   constructor(
     private locationService: LocationService,
@@ -73,7 +77,7 @@ export class MapComponent implements OnInit {
           })
             .addTo(this.markers)
             .on('click', (e) => {
-              map.setView([user.location.lat, user.location.lon], 15);
+              map.setView([user.location.lat, user.location.lon], this.panZoom);
             })
             .on('contextmenu', (e) => {
               L.popup()
@@ -90,5 +94,9 @@ export class MapComponent implements OnInit {
         });
       }
     });
+  }
+
+  public moveTo(user: User) {
+    this.map.setView([user.location.lat, user.location.lon], this.panZoom);
   }
 }

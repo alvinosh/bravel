@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { RoomService } from '../core/services/room.service';
 import { SocketioService } from '../core/services/socketio.service';
+import { User } from '../shared/models/DTOs/User';
 import { Page } from '../shared/models/Page';
+import { MapComponent } from './map/map.component';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +13,22 @@ import { Page } from '../shared/models/Page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  @ViewChild(MapComponent) map: MapComponent;
+
   currentPage: Page = Page.Back;
 
   Page = Page;
 
   setPage(x: Page) {
     this.currentPage = x;
+
+    if (x === Page.Back) {
+      this.map.moveTo(this.auth.getCurrentUser());
+    }
+  }
+
+  userPan(user: User) {
+    this.map.moveTo(user);
   }
 
   constructor(

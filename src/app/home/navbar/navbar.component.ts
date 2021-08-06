@@ -32,7 +32,6 @@ export class NavbarComponent implements OnInit {
 
   setActive(x: Page) {
     this.active = x;
-
     this.pageChange.emit(this.active);
   }
 
