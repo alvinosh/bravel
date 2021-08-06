@@ -49,12 +49,12 @@ export class AuthService {
   }
 
   doLoginUser(data: any) {
-    localStorage.setItem(this.TOKEN, data.token);
+    sessionStorage.setItem(this.TOKEN, data.token);
   }
 
   doLogoutUser(): void {
     this.socket.logout(this.getToken());
-    localStorage.removeItem(this.TOKEN);
+    sessionStorage.removeItem(this.TOKEN);
   }
 
   getCurrentUser(): User {
@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem(this.TOKEN);
+    return sessionStorage.getItem(this.TOKEN);
   }
 
   isLoggedIn(): boolean {

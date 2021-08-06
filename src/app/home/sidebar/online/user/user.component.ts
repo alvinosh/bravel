@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/DTOs/User';
 
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-user',
@@ -14,16 +15,36 @@ export class UserComponent {
 
   faUserCircle = faUserCircle;
 
-  distance: number = 1;
-
-  constructor() {}
+  constructor(private userService: UsersService) {}
 
   getDistance() {
-    let x1 = this.user.location.lon;
-    let y1 = this.user.location.lat;
-    let x2 = this.currentUser.location.lon;
-    let y2 = this.currentUser.location.lon;
+    let lon1 = this.user.location.lon;
+    let lat1 = this.user.location.lat;
+    let lon2 = this.currentUser.location.lon;
+    let lat2 = this.currentUser.location.lat;
 
-    return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    // console.log('Current: ', lon1, lat1);
+    // console.log('Other: ', lon2, lat2);
+
+    let earthRadius = 6200;
+
+    let latDelta = ((lat2 - lat1) * Math.PI) / 180;
+    let lonDelta = ((lon2 - lon1) * Math.PI) / 180;
+
+    let lat1Rad = (lat1 * Math.PI) / 180;
+    let lat2Rad = (lat2 * Math.PI) / 180;
+
+    let a =
+      Math.sin(latDelta / 2) * Math.sin(latDelta / 2) +
+      Math.sin(lonDelta / 2) *
+        Math.sin(lonDelta / 2) *
+        Math.cos(lat1Rad) *
+        Math.cos(lat2Rad);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    let distance = earthRadius * c;
+
+    return distance;
   }
 }

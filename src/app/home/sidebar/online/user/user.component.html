@@ -2,6 +2,8 @@
   <fa-icon [icon]="faUserCircle"></fa-icon>
   <div class="content">
     <h2>{{ user.username }}</h2>
-    <h6>{{ getDistance() | number: "1.1-1" }} Km away</h6>
+    <h6 *ngIf="!userService.isCurrentUser(user)">
+      {{ getDistance() | number: "1.1-1" }} Km away
+    </h6>
   </div>
 </div>

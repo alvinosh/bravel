@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons';
 import { RoomService } from 'src/app/core/services/room.service';
+import { Room } from 'src/app/shared/models/DTOs/Room';
 
 @Component({
   selector: 'app-group',
@@ -12,16 +13,14 @@ export class GroupComponent implements OnInit {
   faPlus = faPlus;
   faCog = faCog;
 
-  roomList: string[] = [];
+  roomList: Room[] = [];
 
   constructor(private roomService: RoomService) {}
 
   ngOnInit() {
     this.roomService.getRooms().subscribe((data) => {
-      console.log(data);
-
       if (data) {
-        this.roomList = data.map((room) => room.name);
+        this.roomList = data;
       }
     });
   }
