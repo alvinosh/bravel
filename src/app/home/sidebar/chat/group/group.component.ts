@@ -28,10 +28,8 @@ export class GroupComponent implements OnInit {
     this.roomService.getRooms().subscribe((data) => {
       if (data) {
         this.roomList = data;
-        if (this.roomList) {
-          this.selroom = this.roomList[0];
-          this.roomEvent.emit(this.selroom);
-        }
+        this.selroom = this.roomList[0];
+        this.roomEvent.emit(this.selroom);
       }
     });
   }

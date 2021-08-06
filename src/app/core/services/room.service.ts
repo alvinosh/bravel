@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Message } from 'src/app/shared/models/DTOs/Message';
 import { Room, RoomRequest } from 'src/app/shared/models/DTOs/Room';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { ApiHttpService } from './api-http.service';
@@ -36,6 +37,15 @@ export class RoomService {
     });
   }
 
+  formatMsg(msg: any): Message {
+    return {
+      content: msg.text,
+      id: msg.id,
+      room_id: msg.groupId,
+      sender: this.formatUser(msg.sender),
+    };
+  }
+
   formatUser(user: any): User {
     return {
       id: user.id,
@@ -61,6 +71,9 @@ export class RoomService {
       }),
       admins: room.admins.map((user) => {
         return this.formatUser(user);
+      }),
+      messages: room.messages.map((msg) => {
+        return this.formatMsg(msg);
       }),
     };
   }

@@ -1,3 +1,4 @@
+import { Message } from './Message';
 import { User } from './User';
 
 export interface RoomRequest {
@@ -12,4 +13,5 @@ export interface Room {
   users: User[];
   admins: User[];
   owner: User;
+  messages: Message[];
 }

@@ -1,9 +1,9 @@
 <div class="container">
   <app-group (roomEvent)="changeRoom($event)"></app-group>
 
-  <div class="messages">
+  <div *ngIf="currentRoom" class="messages">
     <app-message
-      *ngFor="let message of messages"
+      *ngFor="let message of currentRoom.messages"
       [message]="message"
     ></app-message>
   </div>

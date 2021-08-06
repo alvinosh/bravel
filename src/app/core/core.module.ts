@@ -6,6 +6,8 @@ import { SocketioService } from './services/socketio.service';
 import { UsersService } from './services/users.service';
 import { ApiHttpService } from './services/api-http.service';
 import { Constants } from './constants';
+import { RoomService } from './services/room.service';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [],
@@ -13,6 +15,8 @@ import { Constants } from './constants';
     LocationService,
     SocketioService,
     UsersService,
+    RoomService,
+    MessageService,
     ApiHttpService,
     Constants,
   ],

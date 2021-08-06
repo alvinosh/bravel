@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MessageService } from 'src/app/core/services/message.service';
 import { RoomService } from 'src/app/core/services/room.service';
-import { UsersService } from 'src/app/core/services/users.service';
-import { Message } from 'src/app/shared/models/DTOs/Message';
+import { Message, MessageRequest } from 'src/app/shared/models/DTOs/Message';
 import { Room } from 'src/app/shared/models/DTOs/Room';
 
 @Component({
@@ -10,18 +10,19 @@ import { Room } from 'src/app/shared/models/DTOs/Room';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
-  messages: Message[] = [];
   currentRoom: Room;
-
-  constructor(private userSerivce: UsersService) {}
+  constructor(private messageService: MessageService) {}
 
   sendMsg(msg: string) {
-    let m: Message = {
-      content: msg,
-      sender: this.userSerivce.getCurrentUser(),
-      room: this.currentRoom,
+    let m: MessageRequest = {
+      message: msg,
+      room_id: this.currentRoom.id,
     };
-    this.messages.push(m);
+
+    this.messageService.createMessage(m).subscribe(
+      (data) => {},
+      (error) => console.log(error)
+    );
   }
 
   changeRoom(room: Room) {
