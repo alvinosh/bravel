@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons';
 import { RoomService } from 'src/app/core/services/room.service';
@@ -14,6 +14,13 @@ export class GroupComponent implements OnInit {
   faCog = faCog;
 
   roomList: Room[] = [];
+  selroom: Room;
+
+  @Output() roomEvent = new EventEmitter<Room>();
+
+  roomChange() {
+    this.roomEvent.emit(this.selroom);
+  }
 
   constructor(private roomService: RoomService) {}
 
@@ -21,6 +28,10 @@ export class GroupComponent implements OnInit {
     this.roomService.getRooms().subscribe((data) => {
       if (data) {
         this.roomList = data;
+        if (this.roomList) {
+          this.selroom = this.roomList[0];
+          this.roomEvent.emit(this.selroom);
+        }
       }
     });
   }

@@ -1,4 +1,12 @@
-<div class="container">
-  <input type="text" name="message" id="message" />
-  <button><fa-icon [icon]="faPaperPlane"></fa-icon></button>
+<div class="container" *ngIf="currentRoom">
+  <input
+    (keydown.enter)="newMessage()"
+    type="text"
+    name="message"
+    id="message"
+    [(ngModel)]="msg"
+  />
+  <button (click)="newMessage()">
+    <fa-icon [icon]="faPaperPlane"></fa-icon>
+  </button>
 </div>

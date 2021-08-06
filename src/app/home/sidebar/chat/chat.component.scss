@@ -7,15 +7,37 @@
 
 .container {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
 }
 
 .messages {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
   flex: 1 1 auto;
   overflow-y: scroll;
+
+  height: 100%;
+
+  width: 100%;
+}
+
+app-group {
+  width: 100%;
+}
+
+app-message {
+  width: 95%;
+}
+
+app-message-form {
+  padding: 2.5% 0;
+  width: 95%;
 }
 
 * {

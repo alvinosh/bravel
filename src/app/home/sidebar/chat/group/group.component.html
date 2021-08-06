@@ -1,8 +1,9 @@
-<div class="container">
-  <select name="" id="">
-    <option *ngFor="let room of roomList" [value]="room.name">
+<div *ngIf="selroom" class="container">
+  <select (change)="roomChange()" [(ngModel)]="selroom">
+    <option *ngFor="let room of roomList" [ngValue]="room">
       {{ room.name }}
     </option>
   </select>
   <button><fa-icon [icon]="faCog"></fa-icon></button>
 </div>
+<div *ngIf="!selroom" class="container noroom">You are not in a Room</div>

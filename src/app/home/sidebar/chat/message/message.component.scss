@@ -6,27 +6,29 @@
 }
 
 .container {
-  width: 95%;
+  width: 100%;
+
   margin: auto;
-  padding-top: 10px;
 
   font-size: 15px;
 }
 
 h3 {
+  margin: 0;
+
   font-size: 0.9em;
   font-style: bold;
+  font-weight: 900;
   font-family: Roboto, Helvetica, sans-serif;
 
   color: $other-1;
 }
 
 .content {
-  $border-radius: 7px;
+  $border-radius: 3px;
+  padding: 5px 7px;
 
   background-color: $other-1;
-
-  padding: 3% 6%;
 
   -moz-border-radius: $border-radius; //for mozilla support
   -webkit-border-radius: $border-radius; //for chrome support
@@ -34,6 +36,8 @@ h3 {
 }
 
 .content p {
+  margin: 0;
+
   font-size: 1em;
   font-family: Roboto, Helvetica, sans-serif;
 

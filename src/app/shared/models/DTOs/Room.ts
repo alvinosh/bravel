@@ -7,6 +7,7 @@ export interface RoomRequest {
 }
 
 export interface Room {
+  id: number;
   name: string;
   users: User[];
   admins: User[];

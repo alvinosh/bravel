@@ -52,6 +52,7 @@ export class UsersService {
 
   formatData(data: any): User {
     return {
+      id: data.id,
       email: data.email,
       username: data.username,
       firstname: data.first_name,

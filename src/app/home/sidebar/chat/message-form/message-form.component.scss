@@ -4,7 +4,6 @@
 $border-radius: 10px;
 
 .container {
-  width: 95%;
   background-color: $color-2;
 
   display: flex;
@@ -12,7 +11,7 @@ $border-radius: 10px;
   justify-content: flex-start;
   align-items: stretch;
 
-  margin: 5% auto;
+  margin: auto;
 
   // -moz-border-radius: $border-radius; //for mozilla support
   // -webkit-border-radius: $border-radius; //for chrome support
@@ -28,7 +27,7 @@ input[type="text"] {
 
   color: $other-1;
 
-  margin: 0 2%;
+  margin-right: 2%;
   padding: 2%;
 
   border: 1px solid lighten($other-1, 10%);
