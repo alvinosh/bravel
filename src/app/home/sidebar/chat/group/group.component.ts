@@ -38,6 +38,8 @@ export class GroupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.roomService.loadRooms();
+
     this.roomService.getRooms().subscribe((data) => {
       if (data) {
         this.roomList = data;

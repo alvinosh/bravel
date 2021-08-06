@@ -73,7 +73,7 @@ export class MapComponent implements OnInit {
           })
             .addTo(this.markers)
             .on('click', (e) => {
-              map.setView([user.location.lat, user.location.lon]);
+              map.setView([user.location.lat, user.location.lon], 15);
             })
             .on('contextmenu', (e) => {
               L.popup()

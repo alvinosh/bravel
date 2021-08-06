@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoomService } from 'src/app/core/services/room.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { RoomRequest } from 'src/app/shared/models/DTOs/Room';
 import { InputType } from 'src/app/shared/models/Input';
+import { Page } from 'src/app/shared/models/Page';
 
 @Component({
   selector: 'app-add',
@@ -12,6 +13,8 @@ import { InputType } from 'src/app/shared/models/Input';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
+  @Output() pageEvent = new EventEmitter<Page>();
+
   type = InputType;
 
   createForm = this.fb.group({
@@ -39,6 +42,7 @@ export class AddComponent implements OnInit {
       (data) => {},
       (error) => (this.errors = error.error.errors)
     );
+    this.pageEvent.emit(Page.Back);
   }
 
   ngOnInit() {

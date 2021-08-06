@@ -5,6 +5,7 @@
 
   <div [class.tall]="currentPage !== Page.Back" class="content">
     <app-sidebar
+      (pageChange)="setPage($event)"
       [class.hide]="currentPage === Page.Back"
       [page]="currentPage"
     ></app-sidebar>

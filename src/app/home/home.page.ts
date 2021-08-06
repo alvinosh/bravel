@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
+import { RoomService } from '../core/services/room.service';
 import { SocketioService } from '../core/services/socketio.service';
 import { Page } from '../shared/models/Page';
 
@@ -21,6 +22,7 @@ export class HomePage {
   constructor(
     private socket: SocketioService,
     private auth: AuthService,
+    private roomService: RoomService,
     private router: Router
   ) {
     this.router.events.subscribe((ev) => {

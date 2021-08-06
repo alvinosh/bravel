@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SocketioService } from 'src/app/core/services/socketio.service';
 import { Page } from 'src/app/shared/models/Page';
 
@@ -8,7 +8,8 @@ import { Page } from 'src/app/shared/models/Page';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  @Input() page: Page = Page.Back; // decorate the property with @Input(
+  @Input() page: Page = Page.Back;
+  @Output() pageChange = new EventEmitter<Page>();
 
   Page = Page;
 
@@ -16,5 +17,11 @@ export class SidebarComponent {
     return x === this.page;
   }
 
+  changePage(page: Page) {
+    this.pageChange.emit(page);
+  }
+
   constructor() {}
+
+  ngOnInit() {}
 }
