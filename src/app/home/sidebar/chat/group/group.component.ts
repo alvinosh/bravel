@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons';
 import { RoomService } from 'src/app/core/services/room.service';
+import { UsersService } from 'src/app/core/services/users.service';
 import { Room } from 'src/app/shared/models/DTOs/Room';
 
 @Component({
@@ -22,13 +23,34 @@ export class GroupComponent implements OnInit {
     this.roomEvent.emit(this.selroom);
   }
 
-  constructor(private roomService: RoomService) {}
+  constructor(
+    private roomService: RoomService,
+    private usersService: UsersService
+  ) {}
+
+  isAdmin() {
+    for (let i = 0; i < this.selroom.admins.length; i++) {
+      if (this.usersService.isCurrentUser(this.selroom.admins[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   ngOnInit() {
     this.roomService.getRooms().subscribe((data) => {
       if (data) {
         this.roomList = data;
-        this.selroom = this.roomList[0];
+        if (!this.selroom) {
+          this.selroom = this.roomList[0];
+        } else {
+          this.roomList.forEach((room) => {
+            if (this.selroom.id === room.id) {
+              this.selroom = room;
+            }
+          });
+        }
+
         this.roomEvent.emit(this.selroom);
       }
     });

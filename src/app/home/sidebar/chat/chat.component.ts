@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MessageService } from 'src/app/core/services/message.service';
 import { RoomService } from 'src/app/core/services/room.service';
 import { Message, MessageRequest } from 'src/app/shared/models/DTOs/Message';
@@ -10,6 +10,8 @@ import { Room } from 'src/app/shared/models/DTOs/Room';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
+  @ViewChild('scroller') private scroller: ElementRef;
+
   currentRoom: Room;
   constructor(private messageService: MessageService) {}
 
@@ -27,5 +29,10 @@ export class ChatComponent {
 
   changeRoom(room: Room) {
     this.currentRoom = room;
+
+    setTimeout(() => {
+      this.scroller.nativeElement.scrollTop =
+        this.scroller.nativeElement.scrollTopMax;
+    }, 0);
   }
 }

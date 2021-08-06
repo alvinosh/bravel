@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
-import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { Room } from 'src/app/shared/models/DTOs/Room';
 
