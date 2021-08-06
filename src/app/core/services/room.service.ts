@@ -12,6 +12,8 @@ import { SocketioService } from './socketio.service';
   providedIn: 'root',
 })
 export class RoomService {
+  roomIndex = 0;
+
   roomSubject: BehaviorSubject<Room[]>;
 
   constructor(private api: ApiHttpService, private socket: SocketioService) {

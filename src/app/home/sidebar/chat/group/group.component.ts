@@ -11,6 +11,8 @@ import { Room } from 'src/app/shared/models/DTOs/Room';
   styleUrls: ['./group.component.scss'],
 })
 export class GroupComponent implements OnInit {
+  private readonly ROOM = 'ROOM';
+
   faPlus = faPlus;
   faCog = faCog;
 
@@ -20,6 +22,7 @@ export class GroupComponent implements OnInit {
   @Output() roomEvent = new EventEmitter<Room>();
 
   roomChange() {
+    sessionStorage.setItem(this.ROOM, this.selroom.id.toString());
     this.roomEvent.emit(this.selroom);
   }
 
@@ -44,7 +47,15 @@ export class GroupComponent implements OnInit {
       if (data) {
         this.roomList = data;
         if (!this.selroom) {
-          this.selroom = this.roomList[0];
+          let selroom_id: number = parseInt(sessionStorage.getItem(this.ROOM));
+          if (selroom_id) {
+            this.roomList.forEach((room) => {
+              if (room.id === selroom_id) {
+                this.selroom = room;
+              }
+            });
+          }
+          if (!this.selroom) this.selroom = this.roomList[0];
         } else {
           this.roomList.forEach((room) => {
             if (this.selroom.id === room.id) {
