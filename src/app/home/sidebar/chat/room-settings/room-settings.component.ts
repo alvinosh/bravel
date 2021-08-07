@@ -21,15 +21,12 @@ export class RoomSettingsComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit() {
-    setInterval(() => {
-      console.log(this.currentRoom);
-    }, 5000);
     this.usersService.usersSubject.subscribe((data) => {
       if (data) {
         this.avaUsers = data.filter((user) => {
           for (let i = 0; i < this.currentRoom.users.length; i++) {
             const u = this.currentRoom.users[i];
-            if ((u.username = user.username)) return false;
+            if (u.username === user.username) return false;
           }
           return true;
         });
