@@ -51,13 +51,12 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearInterval(this.locInterval);
-    console.log('Inside Destroy');
   }
 
   private async getLocation(): Promise<Location> {
     let data = await this.locationService.getGeopostion();
     return {
-      lat: data.coords.latitude + Math.random(),
+      lat: data.coords.latitude,
       lon: data.coords.longitude,
     };
   }
