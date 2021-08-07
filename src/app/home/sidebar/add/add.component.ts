@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { RoomService } from 'src/app/core/services/room.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { RoomRequest } from 'src/app/shared/models/DTOs/Room';
@@ -50,7 +51,7 @@ export class AddComponent implements OnInit {
       if (data) {
         this.userList = data.map((user) => user.username);
         this.userList = this.userList.filter((user) => {
-          return this.usersService.getCurrentUser().username !== user;
+          return this.auth.getCurrentUser().username !== user;
         });
       }
     });
@@ -60,6 +61,7 @@ export class AddComponent implements OnInit {
     private fb: FormBuilder,
     private usersService: UsersService,
     private roomService: RoomService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 }

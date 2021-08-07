@@ -10,13 +10,10 @@ import { User } from 'src/app/shared/models/DTOs/User';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent {
-  constructor(
-    private usersService: UsersService,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   getUser(): User {
-    return this.usersService.getCurrentUser();
+    return this.authService.getCurrentUser();
   }
 
   logout() {

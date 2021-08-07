@@ -3,6 +3,7 @@ import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { RoomService } from '../core/services/room.service';
 import { SocketioService } from '../core/services/socketio.service';
+import { UsersService } from '../core/services/users.service';
 import { User } from '../shared/models/DTOs/User';
 import { Page } from '../shared/models/Page';
 import { MapComponent } from './map/map.component';
@@ -23,7 +24,9 @@ export class HomePage {
     this.currentPage = x;
 
     if (x === Page.Back) {
-      this.map.moveTo(this.auth.getCurrentUser());
+      this.usersService.getCurrentUser().subscribe((data) => {
+        this.map.moveTo(data.user);
+      });
     }
   }
 
@@ -34,7 +37,7 @@ export class HomePage {
   constructor(
     private socket: SocketioService,
     private auth: AuthService,
-    private roomService: RoomService,
+    private usersService: UsersService,
     private router: Router
   ) {
     this.router.events.subscribe((ev) => {

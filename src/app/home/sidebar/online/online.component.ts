@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { SocketioService } from 'src/app/core/services/socketio.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
@@ -13,10 +14,10 @@ export class OnlineComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private auth: AuthService) {}
 
   getUser(): User {
-    return this.usersService.getCurrentUser();
+    return this.auth.getCurrentUser();
   }
 
   panEvent(user: User) {

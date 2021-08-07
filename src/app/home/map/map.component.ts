@@ -22,7 +22,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private panZoom = 15;
 
-  private updateTime = 50 * 1000;
+  private updateTime = 10000;
   private locInterval;
 
   constructor(
@@ -41,7 +41,8 @@ export class MapComponent implements OnInit, OnDestroy {
       (error) => console.log(error)
     );
     this.locInterval = setInterval(async () => {
-      this.usersService.updateLocation(await this.getLocation()).subscribe(
+      let loc = await this.getLocation();
+      this.usersService.updateLocation(loc).subscribe(
         (data) => {},
         (error) => console.log(error)
       );
@@ -55,7 +56,10 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private async getLocation(): Promise<Location> {
     let data = await this.locationService.getGeopostion();
-    return { lat: data.coords.latitude, lon: data.coords.longitude };
+    return {
+      lat: data.coords.latitude + Math.random(),
+      lon: data.coords.longitude,
+    };
   }
 
   private initMap(loc: Location): void {

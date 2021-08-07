@@ -31,18 +31,22 @@ export class UsersService {
   }
 
   getCurrentUser() {
-    return this.auth.getCurrentUser();
+    return this.api.get(
+      this.api.createUrlWithPathVariables('user', [
+        this.auth.getCurrentUser().username,
+      ])
+    );
   }
 
   isCurrentUser(other: User): boolean {
-    return this.getCurrentUser().username === other.username;
+    return this.auth.getCurrentUser().username === other.username;
   }
 
   getUsers(): BehaviorSubject<User[]> {
     if (this.usersSubject) return this.usersSubject;
   }
 
-  loadUsers(withCurrent: boolean = false) {
+  loadUsers() {
     this.api.get(this.api.createUrl('users')).subscribe((data) => {
       let onlineUsers: User[] = data.users.map((user) => {
         return this.formatData(user);
