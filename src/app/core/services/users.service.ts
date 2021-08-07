@@ -9,6 +9,7 @@ import { ApiHttpService } from './api-http.service';
 import { SocketioService } from './socketio.service';
 import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { Location } from 'src/app/shared/models/DTOs/Location';
+import { Room } from 'src/app/shared/models/DTOs/Room';
 
 @Injectable({
   providedIn: 'root',
@@ -68,5 +69,9 @@ export class UsersService {
 
   updateLocation(loc: Location) {
     return this.api.put(this.api.createUrl('user/location'), loc);
+  }
+
+  leaveRoom(room: Room) {
+    return this.api.put(this.api.createUrl('user/room'), room);
   }
 }

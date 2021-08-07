@@ -4,6 +4,9 @@
       {{ room.name }}
     </option>
   </select>
+  <button class="leave" (click)="leaveRoom()">
+    <fa-icon [icon]="faSignOutAlt"></fa-icon>
+  </button>
   <button *ngIf="isAdmin()"><fa-icon [icon]="faCog"></fa-icon></button>
 </div>
 <div *ngIf="!selroom" class="container noroom">You are not in a Room</div>

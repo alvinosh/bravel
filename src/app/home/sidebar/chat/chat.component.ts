@@ -13,6 +13,7 @@ export class ChatComponent {
   @ViewChild('scroller') private scroller: ElementRef;
 
   currentRoom: Room;
+  settings: boolean = true;
   constructor(private messageService: MessageService) {}
 
   sendMsg(msg: string) {
@@ -27,12 +28,13 @@ export class ChatComponent {
     );
   }
 
-  changeRoom(room: Room) {
+  changeRoom(room: Room | null) {
     this.currentRoom = room;
-
-    setTimeout(() => {
-      this.scroller.nativeElement.scrollTop =
-        this.scroller.nativeElement.scrollTopMax;
-    }, 0);
+    if (!this.settings) {
+      setTimeout(() => {
+        this.scroller.nativeElement.scrollTop =
+          this.scroller.nativeElement.scrollTopMax;
+      }, 0);
+    }
   }
 }
