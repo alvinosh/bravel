@@ -42,9 +42,10 @@ export class MapComponent implements OnInit, OnDestroy {
     );
     this.locInterval = setInterval(async () => {
       let loc = await this.getLocation();
-      this.usersService
-        .updateLocation(loc)
-        .subscribe((error) => console.log(error));
+      this.usersService.updateLocation(loc).subscribe(
+        (data) => {},
+        (error) => console.log(error)
+      );
     }, this.updateTime);
   }
 
