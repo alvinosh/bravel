@@ -47,6 +47,7 @@ export class GroupComponent implements OnInit {
   }
 
   leaveRoom() {
+    sessionStorage.removeItem(this.ROOM);
     this.usersService.leaveRoom(this.selroom).subscribe(
       (data) => {},
       (error) => console.log(error)
@@ -58,27 +59,20 @@ export class GroupComponent implements OnInit {
 
     this.roomService.getRooms().subscribe((data) => {
       if (data) {
+        this.selroom = null;
         this.roomList = data;
-
-        if (!this.selroom) {
-          let selroom_id: number = parseInt(sessionStorage.getItem(this.ROOM));
-          if (selroom_id) {
-            this.roomList.forEach((room) => {
-              if (room.id === selroom_id) {
-                this.selroom = room;
-              }
-            });
-          }
-          if (!this.selroom) this.selroom = this.roomList[0];
-        } else {
+        let selroom_id: number = parseInt(sessionStorage.getItem(this.ROOM));
+        if (selroom_id) {
           this.roomList.forEach((room) => {
-            if (this.selroom.id === room.id) {
+            if (room.id === selroom_id) {
               this.selroom = room;
             }
           });
         }
-        if (this.roomList.length <= 0) {
-          this.selroom = null;
+        if (!this.selroom) {
+          if (this.roomList.length >= 1) {
+            this.selroom = this.roomList[0];
+          }
         }
 
         this.roomEvent.emit(this.selroom);

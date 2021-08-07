@@ -1,0 +1,137 @@
+@import "/src/theme/variables.scss";
+
+.container {
+  width: 90%;
+  height: 100%;
+
+  margin: auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.buttons button {
+  flex: 1 1 auto;
+  margin: 5px;
+}
+
+.name {
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.users {
+  width: 100%;
+  height: 100%;
+
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow-y: scroll;
+}
+
+.add-user {
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.user {
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  font-size: 1.2rem;
+  color: $color-2;
+
+  padding: 10px 0;
+  margin: 3px auto;
+
+  border-radius: 7px;
+
+  background-color: $other-1;
+}
+
+.user p {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.user .u-buttons {
+  margin-left: auto;
+}
+
+.user h3 {
+  margin: 0;
+  margin-left: auto;
+  padding: 0 10px;
+
+  font-style: italic;
+
+  color: $color-2;
+}
+
+.user button {
+  background: none;
+  border: none;
+}
+
+.user .kick {
+  color: $color-2;
+}
+
+fa-icon {
+  padding: 0 10px;
+}
+
+@media only screen and (max-width: $break-point-1) {
+  .buttons {
+    flex-flow: row nowrap;
+  }
+}
+
+@media only screen and (min-width: $break-point-1) {
+  .buttons button {
+    width: 100%;
+  }
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $color-2;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $other-1;
+}

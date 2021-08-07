@@ -1,3 +1,42 @@
-<p>
-  room-settings works!
-</p>
+<div class="container">
+  <div class="name">
+    <mat-form-field style="padding: 0">
+      <mat-label>Room Name</mat-label>
+      <input matInput [value]="currentRoom.name" />
+    </mat-form-field>
+  </div>
+  <div class="users">
+    <div class="user" *ngFor="let user of currentRoom.users">
+      <p>{{ user.username }}</p>
+      <div class="u-buttons" *ngIf="!isAdmin(user)">
+        <button class="kick">
+          <fa-icon [icon]="faTimes" size="lg"></fa-icon>
+        </button>
+        <button class="kick">
+          <fa-icon [icon]="faTimes" size="lg"></fa-icon>
+        </button>
+      </div>
+
+      <h3 *ngIf="isOwner(user)">Owner</h3>
+      <h3 *ngIf="isAdmin(user) && !isOwner(user)">Admin</h3>
+    </div>
+  </div>
+  <div class="add-user">
+    <mat-form-field>
+      <mat-label>Add Users</mat-label>
+      <mat-select f multiple>
+        <mat-option disabled *ngIf="avaUsers.length === 0"
+          >No Online Users</mat-option
+        >
+        <mat-option *ngFor="let user of avaUsers">{{
+          user.username
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button color="primary">Confirm</button>
+    <button mat-flat-button color="accent">Discard</button>
+    <button mat-flat-button color="warn">Delete Room</button>
+  </div>
+</div>

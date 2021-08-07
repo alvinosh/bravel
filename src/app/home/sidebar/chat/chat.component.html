@@ -15,5 +15,9 @@
     (messageEvent)="sendMsg($event)"
   ></app-message-form>
 
-  <room-settings class="settings" *ngIf="settings"></room-settings>
+  <room-settings
+    [currentRoom]="currentRoom"
+    class="settings"
+    *ngIf="settings && currentRoom"
+  ></room-settings>
 </div>

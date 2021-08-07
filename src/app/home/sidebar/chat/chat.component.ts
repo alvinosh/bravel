@@ -34,7 +34,7 @@ export class ChatComponent {
 
   changeRoom(room: Room | null) {
     this.currentRoom = room;
-    if (!this.settings) {
+    if (!this.settings && this.currentRoom) {
       setTimeout(() => {
         this.scroller.nativeElement.scrollTop =
           this.scroller.nativeElement.scrollTopMax;

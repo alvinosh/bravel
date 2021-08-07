@@ -11,17 +11,20 @@ import { UsersService } from 'src/app/core/services/users.service';
 })
 export class UserComponent {
   @Input() user: User;
-  @Input() currentUser: User;
 
   faUserCircle = faUserCircle;
 
   constructor(private userService: UsersService) {}
 
   getDistance() {
+    let currentUser = this.userService.getCurrentUser();
+
+    if (!currentUser) return;
+
     let lon1 = this.user.location.lon;
     let lat1 = this.user.location.lat;
-    let lon2 = this.currentUser.location.lon;
-    let lat2 = this.currentUser.location.lat;
+    let lon2 = currentUser.location.lon;
+    let lat2 = currentUser.location.lat;
 
     // console.log('Current: ', lon1, lat1);
     // console.log('Other: ', lon2, lat2);
