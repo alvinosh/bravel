@@ -33,6 +33,7 @@ export class ChatComponent {
   }
 
   changeRoom(room: Room | null) {
+    this.settings = false;
     this.currentRoom = room;
     if (!this.settings && this.currentRoom) {
       setTimeout(() => {

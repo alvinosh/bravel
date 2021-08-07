@@ -83,4 +83,8 @@ export class RoomService {
   getRooms(): BehaviorSubject<Room[]> {
     if (this.roomSubject) return this.roomSubject;
   }
+
+  updateRoom(room: Room) {
+    return this.api.put(this.api.createUrl('room'), room);
+  }
 }

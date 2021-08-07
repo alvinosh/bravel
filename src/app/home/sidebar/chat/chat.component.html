@@ -16,6 +16,7 @@
   ></app-message-form>
 
   <room-settings
+    (closeSettingsEvent)="toggleSettings()"
     [currentRoom]="currentRoom"
     class="settings"
     *ngIf="settings && currentRoom"
