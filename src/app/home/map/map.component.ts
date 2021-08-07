@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Location } from 'src/app/shared/models/DTOs/Location';
 
@@ -8,29 +8,54 @@ import * as L from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   private map;
   private markers;
   private loc: Location;
 
   private panZoom = 15;
 
+  private updateTime = 50 * 1000;
+  private locInterval;
+
   constructor(
     private locationService: LocationService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {
-    let data = await this.locationService.getGeopostion();
-    this.loc = { lat: data.coords.latitude, lon: data.coords.longitude };
+    this.loc = await this.getLocation();
     this.initMap(this.loc);
     this.initMarkers();
+
+    this.usersService.updateLocation(await this.getLocation()).subscribe(
+      (data) => {},
+      (error) => console.log(error)
+    );
+    this.locInterval = setInterval(async () => {
+      this.usersService.updateLocation(await this.getLocation()).subscribe(
+        (data) => {},
+        (error) => console.log(error)
+      );
+    }, this.updateTime);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.locInterval);
+    console.log('Inside Destroy');
+  }
+
+  private async getLocation(): Promise<Location> {
+    let data = await this.locationService.getGeopostion();
+    return { lat: data.coords.latitude, lon: data.coords.longitude };
   }
 
   private initMap(loc: Location): void {
