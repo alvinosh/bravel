@@ -11,18 +11,18 @@ import { UsersService } from 'src/app/core/services/users.service';
 })
 export class UserComponent {
   @Input() user: User;
-  currentUser: User;
+  currentUser: User = null;
 
   faUserCircle = faUserCircle;
 
   constructor(private userService: UsersService) {
     this.userService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
+      this.currentUser = user.data;
     });
   }
 
-  async getDistance() {
-    if (!this.currentUser) return;
+  getDistance() {
+    if (!this.currentUser) return 0;
 
     let lon1 = this.user.location.lon;
     let lat1 = this.user.location.lat;

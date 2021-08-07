@@ -66,8 +66,6 @@ export class RoomSettingsComponent implements OnInit {
     this.virtualRoom.users = this.virtualRoom.users.filter((u) => {
       return u.username !== user.username;
     });
-
-    console.log(this.virtualRoom);
   }
 
   confirmChanges() {
