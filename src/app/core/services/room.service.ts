@@ -87,4 +87,10 @@ export class RoomService {
   updateRoom(room: Room) {
     return this.api.put(this.api.createUrl('room'), room);
   }
+
+  deleteRoom(room: Room) {
+    return this.api.delete(
+      this.api.createUrlWithPathVariables('room', [room.id])
+    );
+  }
 }

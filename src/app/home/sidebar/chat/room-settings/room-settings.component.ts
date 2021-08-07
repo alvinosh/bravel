@@ -86,5 +86,12 @@ export class RoomSettingsComponent implements OnInit {
     this.virtualRoom = JSON.parse(JSON.stringify(this.currentRoom));
   }
 
-  deleteRoom() {}
+  deleteRoom() {
+    this.roomsService.deleteRoom(this.currentRoom).subscribe(
+      (data) => {
+        this.closeSettingsEvent.emit(true);
+      },
+      (error) => console.log(error)
+    );
+  }
 }
