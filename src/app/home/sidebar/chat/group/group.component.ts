@@ -21,6 +21,7 @@ export class GroupComponent implements OnInit {
   selroom: Room;
 
   @Output() roomEvent = new EventEmitter<Room | undefined>();
+  @Output() toggleSettingsEvent = new EventEmitter<boolean>();
 
   constructor(
     private roomService: RoomService,
@@ -39,6 +40,10 @@ export class GroupComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  toggleSettings() {
+    this.toggleSettingsEvent.emit(true);
   }
 
   leaveRoom() {

@@ -20,10 +20,11 @@ import { MessageComponent } from './sidebar/chat/message/message.component';
 import { MessageFormComponent } from './sidebar/chat/message-form/message-form.component';
 import { UserComponent } from './sidebar/online/user/user.component';
 import { GroupComponent } from './sidebar/chat/group/group.component';
+import { RoomSettingsComponent } from './sidebar/chat/room-settings/room-settings.component';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import {MaterialModule} from "../shared/material.module";
+import { MaterialModule } from '../shared/material.module';
 
 @NgModule({
   declarations: [
@@ -39,18 +40,19 @@ import {MaterialModule} from "../shared/material.module";
     UserComponent,
     HomePage,
     GroupComponent,
+    RoomSettingsComponent,
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        HomePageRoutingModule,
-        FontAwesomeModule,
-        ReactiveFormsModule,
-        CoreModule,
-        SharedModule,
-        MaterialModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    HomePageRoutingModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    CoreModule,
+    SharedModule,
+    MaterialModule,
+  ],
   providers: [Geolocation],
 })
 export class HomePageModule {}

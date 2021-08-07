@@ -13,8 +13,12 @@ export class ChatComponent {
   @ViewChild('scroller') private scroller: ElementRef;
 
   currentRoom: Room;
-  settings: boolean = true;
+  settings: boolean = false;
   constructor(private messageService: MessageService) {}
+
+  toggleSettings() {
+    this.settings = !this.settings;
+  }
 
   sendMsg(msg: string) {
     let m: MessageRequest = {

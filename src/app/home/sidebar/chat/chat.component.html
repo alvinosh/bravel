@@ -1,5 +1,8 @@
 <div class="container">
-  <app-group (roomEvent)="changeRoom($event)"></app-group>
+  <app-group
+    (toggleSettingsEvent)="toggleSettings()"
+    (roomEvent)="changeRoom($event)"
+  ></app-group>
   <div #scroller *ngIf="currentRoom && !settings" class="messages">
     <app-message
       *ngFor="let message of currentRoom.messages"
@@ -12,5 +15,5 @@
     (messageEvent)="sendMsg($event)"
   ></app-message-form>
 
-  <div class="settings" *ngIf="settings">hello</div>
+  <room-settings class="settings" *ngIf="settings"></room-settings>
 </div>
