@@ -9,6 +9,7 @@ import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { AuthService } from 'src/app/auth/services/auth.service';
+const polyUtil = require('polyline-encoded');
 
 @Component({
   selector: 'app-map',
@@ -22,8 +23,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private panZoom = 15;
 
-  private updateTime = 10000;
+  private updateTime = 30000;
   private locInterval;
+  private polyline: any;
 
   constructor(
     private locationService: LocationService,
@@ -41,6 +43,7 @@ export class MapComponent implements OnInit, OnDestroy {
       (error) => console.log(error)
     );
     this.locInterval = setInterval(async () => {
+      this.polyline && this.map.removeLayer(this.polyline);
       let loc = await this.getLocation();
       this.usersService.updateLocation(loc).subscribe(
         (data) => {},
@@ -55,9 +58,16 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private async getLocation(): Promise<Location> {
     let data = await this.locationService.getGeopostion();
+    const item = this.locationService.randomItems[Math.floor(Math.random()*this.locationService.randomItems.length)];
+    const mockData = {
+      coords: {
+        latitude: item.lat,
+        longitude: item.long,
+      }
+    }
     return {
-      lat: data.coords.latitude,
-      lon: data.coords.longitude,
+      lat: mockData.coords.latitude,
+      lon: mockData.coords.longitude,
     };
   }
 
@@ -105,7 +115,7 @@ export class MapComponent implements OnInit, OnDestroy {
           })
             .addTo(this.markers)
             .on('click', (e) => {
-              map.setView([user.location.lat, user.location.lon], this.panZoom);
+              this.setViewOrRoute(map, user, data);
             })
             .on('contextmenu', (e) => {
               L.popup()
@@ -113,7 +123,7 @@ export class MapComponent implements OnInit, OnDestroy {
                 .setContent(
                   `
 									<pre>${user.username}</pre>
-										
+
 								`
                 )
                 .addTo(map)
@@ -126,5 +136,22 @@ export class MapComponent implements OnInit, OnDestroy {
 
   public moveTo(user: User) {
     this.map.setView([user.location.lat, user.location.lon], this.panZoom);
+  }
+
+  private setViewOrRoute(map, user: User, data) {
+    const cu = this.authService.getCurrentUser();
+    if(user.id !== (cu.id || cu.location['id'] || cu.location['userId'])) {
+      const updatedCU = data.find( u => u.username === cu.username);
+      const route = `${updatedCU.location.lon},${updatedCU.location.lat};${user.location.lon},${user.location.lat}`;
+      this.locationService.getOSRMRoute(route).subscribe( response => {
+        response['routes'].map((m) => {
+          this.polyline = L.polyline(polyUtil.decode(m.geometry));
+          this.polyline.addTo(map);
+        });
+      });
+      map.setView([updatedCU.location.lat, updatedCU.location.lon], this.panZoom);
+    } else {
+      map.setView([user.location.lat, user.location.lon], this.panZoom);
+    }
   }
 }

@@ -37,6 +37,7 @@
     "leaflet": "^1.7.1",
     "leaflet.markercluster": "^1.5.0",
     "ngx-socket-io": "^4.0.0",
+    "polyline-encoded": "0.0.9",
     "rxjs": "~6.6.0",
     "socket.io-client": "^2.4.0",
     "tslib": "^2.0.0",
