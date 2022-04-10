@@ -1,4 +1,13 @@
 <div class="container">
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="ii" (selectionChange)="onChange()">
+      <mat-option *ngFor="let map of maps; let i = index" [value]="i">{{
+        map.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <button (click)="logout()">Log Out</button>
 
   <h1>You are logged in as {{ getUser().username }}</h1>
