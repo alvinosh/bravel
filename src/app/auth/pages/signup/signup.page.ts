@@ -11,6 +11,7 @@ import { Location } from 'src/app/shared/models/DTOs/Location';
 
 import { InputType } from 'src/app/shared/models/Input';
 import { AuthService } from '../../services/auth.service';
+import { TokenstorageService } from '../../services/tokenstorage.service';
 
 @Component({
   selector: 'app-signup',
@@ -39,6 +40,7 @@ export class SignupPage {
 
   constructor(
     private locationService: LocationService,
+    private token: TokenstorageService,
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
@@ -60,7 +62,12 @@ export class SignupPage {
     };
 
     this.authService.signup(signupRequest).subscribe(
-      (data) => this.router.navigate(['/home']),
+      (data) => {
+        this.token.saveToken(data.accessToken);
+        this.token.saveRefreshToken(data.refreshToken);
+        this.token.saveUser(data);
+        this.router.navigate(['/home']);
+      },
       (error) => (this.errors = error.error.errors)
     );
   }

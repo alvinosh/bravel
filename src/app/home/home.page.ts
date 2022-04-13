@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
+import { TokenstorageService } from '../auth/services/tokenstorage.service';
 import { RoomService } from '../core/services/room.service';
 import { SocketioService } from '../core/services/socketio.service';
 import { UsersService } from '../core/services/users.service';
@@ -36,14 +37,14 @@ export class HomePage {
 
   constructor(
     private socket: SocketioService,
-    private auth: AuthService,
+    private token: TokenstorageService,
     private usersService: UsersService,
     private router: Router
   ) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         if (ev.url === '/home') {
-          this.socket.join(this.auth.getToken());
+          this.socket.join(this.token.getToken());
         }
       }
     });

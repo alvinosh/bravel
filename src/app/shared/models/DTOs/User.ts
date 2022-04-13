@@ -8,4 +8,7 @@ export interface User {
   lastname: string;
   online: boolean;
   location: Location;
+
+  accessToken: string;
+  refreshToken: string;
 }

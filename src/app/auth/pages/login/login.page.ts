@@ -4,6 +4,7 @@ import { InputType } from 'src/app/shared/models/Input';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TokenstorageService } from '../../services/tokenstorage.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginPage {
 
   constructor(
     private authService: AuthService,
+    private token: TokenstorageService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -37,7 +39,12 @@ export class LoginPage {
     };
 
     this.authService.login(loginRequest).subscribe(
-      (data) => this.router.navigate(['/home']),
+      (data) => {
+        this.token.saveToken(data.accessToken);
+        this.token.saveRefreshToken(data.refreshToken);
+        this.token.saveUser(data);
+        this.router.navigate(['/home']);
+      },
       (error) => (this.errors = error.error.errors)
     );
   }

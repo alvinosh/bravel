@@ -24,9 +24,7 @@ export class AuthService {
     username: string;
     password: string;
   }): Observable<User> {
-    return this.api
-      .post(this.api.createUrl('login'), loginRequest)
-      .pipe(tap((data) => this.doLoginUser(data)));
+    return this.api.post(this.api.createUrl('login'), loginRequest);
   }
 
   signup(user: {
@@ -38,41 +36,12 @@ export class AuthService {
     confirmpassword: string;
     location: Location;
   }): Observable<User> {
-    return this.api
-      .post(this.api.createUrl('signup'), user)
-      .pipe(tap((data) => this.doLoginUser(data)));
+    return this.api.post(this.api.createUrl('signup'), user);
   }
 
-  logoutAndRedirect() {
-    this.doLogoutUser();
-    this.router.navigate(['/login']);
-  }
-
-  doLoginUser(data: any) {
-    sessionStorage.setItem(this.TOKEN, data.token);
-  }
-
-  doLogoutUser(): void {
-    this.socket.logout(this.getToken());
-    sessionStorage.removeItem(this.TOKEN);
-  }
-
-  getCurrentUser(): User {
-    const token = this.getToken();
-    if (token) {
-      const encodedPayload = token.split('.')[1];
-      const payload = window.atob(encodedPayload);
-      return JSON.parse(payload);
-    } else {
-      return undefined;
-    }
-  }
-
-  getToken() {
-    return sessionStorage.getItem(this.TOKEN);
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getCurrentUser();
+  refreshToken(token: string) {
+    return this.api.post(this.api.createUrl('refreshtoken'), {
+      refreshToken: token,
+    });
   }
 }

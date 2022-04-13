@@ -10,6 +10,7 @@ import { SocketioService } from './socketio.service';
 import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { Location } from 'src/app/shared/models/DTOs/Location';
 import { Room } from 'src/app/shared/models/DTOs/Room';
+import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class UsersService {
 
   constructor(
     private api: ApiHttpService,
-    private auth: AuthService,
+    private token: TokenstorageService,
     private socket: SocketioService
   ) {
     this.usersSubject = new BehaviorSubject<User[]>(null);
@@ -33,13 +34,13 @@ export class UsersService {
   getCurrentUser() {
     return this.api.get(
       this.api.createUrlWithPathVariables('user', [
-        this.auth.getCurrentUser().username,
+        this.token.getUser().username,
       ])
     );
   }
 
   isCurrentUser(other: User): boolean {
-    return this.auth.getCurrentUser().username === other.username;
+    return this.token.getUser().username === other.username;
   }
 
   getUsers(): BehaviorSubject<User[]> {
@@ -68,6 +69,8 @@ export class UsersService {
         lat: data.location.lat,
         lon: data.location.lon,
       },
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken,
     };
   }
 

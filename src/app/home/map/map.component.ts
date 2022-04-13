@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/models/DTOs/User';
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { MapService } from 'src/app/core/services/map.service';
+import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service';
 const polyUtil = require('polyline-encoded');
 
 @Component({
@@ -33,7 +34,7 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(
     private locationService: LocationService,
     private usersService: UsersService,
-    private authService: AuthService,
+    private tokenstorageService: TokenstorageService,
     private mapService: MapService
   ) {}
 
@@ -153,7 +154,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private setViewOrRoute(map, user: User, data) {
-    const cu = this.authService.getCurrentUser();
+    const cu = this.tokenstorageService.getUser();
     if (user.id !== (cu.id || cu.location['id'] || cu.location['userId'])) {
       const updatedCU = data.find((u) => u.username === cu.username);
       const route = `${updatedCU.location.lon},${updatedCU.location.lat};${user.location.lon},${user.location.lat}`;
