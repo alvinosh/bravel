@@ -11,6 +11,7 @@ import { catchError, filter, switchMap, take } from 'rxjs/operators';
 
 import { AuthService } from './services/auth.service';
 import { TokenstorageService } from './services/tokenstorage.service';
+import { Router } from '@angular/router';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -23,7 +24,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private tokenService: TokenstorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   intercept(
@@ -34,6 +36,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.tokenService.getToken();
     if (token != null) {
       authReq = this.addTokenHeader(request, token);
+    } else {
+      this.router.navigate(['/login']);
     }
 
     return next.handle(authReq).pipe(
