@@ -40,7 +40,8 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (
           error instanceof HttpErrorResponse &&
-          !authReq.url.includes('auth/signin') &&
+          !authReq.url.includes('login') &&
+          !authReq.url.includes('signup') &&
           error.status === 401
         ) {
           return this.handle401Error(authReq, next);
@@ -84,6 +85,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     /* for Spring Boot back-end */
+
     return request.clone({
       headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
     });

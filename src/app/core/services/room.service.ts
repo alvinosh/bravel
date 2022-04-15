@@ -60,6 +60,8 @@ export class RoomService {
         lat: user.location.lat,
         lon: user.location.lon,
       },
+      accessToken: user.accessToken,
+      refreshToken: user.refreshToken
     };
   }
 

@@ -65,7 +65,8 @@ export class SignupPage {
       (data) => {
         this.token.saveToken(data.accessToken);
         this.token.saveRefreshToken(data.refreshToken);
-        this.token.saveUser(data);
+        this.token.saveUser(data.accessToken);
+
         this.router.navigate(['/home']);
       },
       (error) => (this.errors = error.error.errors)

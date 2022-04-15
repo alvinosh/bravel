@@ -16,10 +16,6 @@ export class TokenstorageService {
   public saveToken(token: string): void {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.setItem(TOKEN_KEY, token);
-    const user = this.getUser();
-    if (user.id) {
-      this.saveUser({ ...user, accessToken: token });
-    }
   }
   public getToken(): string | null {
     return localStorage.getItem(TOKEN_KEY);
@@ -31,15 +27,19 @@ export class TokenstorageService {
   public getRefreshToken(): string | null {
     return localStorage.getItem(REFRESHTOKEN_KEY);
   }
-  public saveUser(user: any): void {
+  public saveUser(token: any): void {
     localStorage.removeItem(USER_KEY);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+
+    localStorage.setItem(USER_KEY, token);
   }
   public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+    const token = localStorage.getItem(USER_KEY);
+    if (token) {
+      const encodedPayload = token.split('.')[1];
+      const payload = window.atob(encodedPayload);
+      return JSON.parse(payload);
+    } else {
+      return undefined;
     }
-    return {};
   }
 }

@@ -17,7 +17,7 @@ export class UserComponent {
 
   constructor(private userService: UsersService) {
     this.userService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user.data;
+      this.currentUser = user;
     });
   }
 
