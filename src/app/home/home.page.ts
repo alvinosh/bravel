@@ -26,7 +26,7 @@ export class HomePage {
 
     if (x === Page.Back) {
       this.usersService.getCurrentUser().subscribe((data) => {
-        this.map.moveTo(data.user);
+        this.map.moveTo(data);
       });
     }
   }

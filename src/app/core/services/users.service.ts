@@ -1,13 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { User } from 'src/app/shared/models/DTOs/User';
 
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 import { ApiHttpService } from './api-http.service';
 import { SocketioService } from './socketio.service';
-import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { Location } from 'src/app/shared/models/DTOs/Location';
 import { Room } from 'src/app/shared/models/DTOs/Room';
 import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service';
@@ -17,6 +14,7 @@ import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service'
 })
 export class UsersService {
   usersSubject: BehaviorSubject<User[]>;
+  currentUserSubject: BehaviorSubject<User>;
 
   constructor(
     private api: ApiHttpService,
@@ -24,19 +22,13 @@ export class UsersService {
     private socket: SocketioService
   ) {
     this.usersSubject = new BehaviorSubject<User[]>(null);
+    this.currentUserSubject = new BehaviorSubject<User>(null);
+
     this.loadUsers();
 
     this.socket.userChange().subscribe((data) => {
       this.loadUsers();
     });
-  }
-
-  getCurrentUser() {
-    return this.api.get(
-      this.api.createUrlWithPathVariables('user', [
-        this.token.getUser().username,
-      ])
-    );
   }
 
   isCurrentUser(other: User): boolean {
@@ -47,9 +39,14 @@ export class UsersService {
     if (this.usersSubject) return this.usersSubject;
   }
 
+  getCurrentUser(): BehaviorSubject<User> {
+    if (this.currentUserSubject) return this.currentUserSubject;
+  }
+
   loadUsers() {
     this.api.get(this.api.createUrl('users')).subscribe((data) => {
       let onlineUsers: User[] = data.users.map((user) => {
+        if (this.isCurrentUser(user)) this.currentUserSubject.next(user);
         return this.formatData(user);
       });
 

@@ -21,6 +21,8 @@ export class OnlineComponent implements OnInit {
   ) {}
 
   getUser(): User {
+    console.log(this.token.getUser());
+
     return this.token.getUser();
   }
 

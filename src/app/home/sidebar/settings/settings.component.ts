@@ -19,8 +19,7 @@ export class SettingsComponent {
 
   constructor(
     private token: TokenstorageService,
-    private mapService: MapService,
-    private router: Router
+    private mapService: MapService
   ) {
     this.maps = mapService.getMaps();
   }
@@ -35,6 +34,5 @@ export class SettingsComponent {
 
   logout() {
     this.token.signOut();
-    this.router.navigate(['/login']);
   }
 }

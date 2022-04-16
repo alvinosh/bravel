@@ -16,8 +16,8 @@ export class UserComponent {
   faUserCircle = faUserCircle;
 
   constructor(private userService: UsersService) {
-    this.userService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
+    this.userService.getCurrentUser().subscribe((data) => {
+      this.currentUser = data;
     });
   }
 
@@ -28,9 +28,6 @@ export class UserComponent {
     let lat1 = this.user.location.lat;
     let lon2 = this.currentUser.location.lon;
     let lat2 = this.currentUser.location.lat;
-
-    // console.log('Current: ', lon1, lat1);
-    // console.log('Other: ', lon2, lat2);
 
     let earthRadius = 6200;
 

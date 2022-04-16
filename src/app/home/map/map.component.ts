@@ -23,11 +23,13 @@ export class MapComponent implements OnInit, OnDestroy {
   private markers;
   private loc: Location;
 
+  private user: User;
+
   private tilelayer;
 
   private panZoom = 15;
 
-  private updateTime = 30000;
+  private updateTime = 10000;
   private locInterval;
   private polyline: any;
 
@@ -39,7 +41,12 @@ export class MapComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    this.initAll();
+    await this.initAll();
+
+    this.usersService.getCurrentUser().subscribe((data) => {
+      this.user = data;
+      this.initMarkers();
+    });
 
     this.mapService.getSubject().subscribe((map) => {
       this.map.removeLayer(this.tilelayer);
@@ -57,12 +64,12 @@ export class MapComponent implements OnInit, OnDestroy {
   private async initAll() {
     this.loc = await this.getLocation();
     this.initMap(this.loc);
-    this.initMarkers();
 
     this.usersService.updateLocation(await this.getLocation()).subscribe(
       (data) => {},
       (error) => console.log(error)
     );
+
     this.locInterval = setInterval(async () => {
       this.polyline && this.map.removeLayer(this.polyline);
       let loc = await this.getLocation();
@@ -155,6 +162,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private setViewOrRoute(map, user: User, data) {
     const cu = this.tokenstorageService.getUser();
+
+    console.log('cu: ', cu);
     if (user.id !== (cu.id || cu.location['id'] || cu.location['userId'])) {
       const updatedCU = data.find((u) => u.username === cu.username);
       const route = `${updatedCU.location.lon},${updatedCU.location.lat};${user.location.lon},${user.location.lat}`;
