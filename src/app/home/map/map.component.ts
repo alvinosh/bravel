@@ -29,7 +29,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private panZoom = 15;
 
-  private updateTime = 10000;
+  private updateTime = 5000;
   private locInterval;
   private polyline: any;
 
