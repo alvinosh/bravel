@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiHttpService } from 'src/app/core/services/api-http.service';
+import { SocketioService } from 'src/app/core/services/socketio.service';
 
 const TOKEN_KEY = 'auth-token';
 const REFRESHTOKEN_KEY = 'auth-refreshtoken';
@@ -9,9 +11,15 @@ const USER_KEY = 'auth-user';
   providedIn: 'root',
 })
 export class TokenstorageService {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private socket: SocketioService,
+    private api: ApiHttpService
+  ) {}
 
   signOut(): void {
+    this.socket.logout(this.getToken());
+    this.api.post(this.api.createUrl('user/offline'), {}).subscribe();
     localStorage.clear();
     this.router.navigate(['/login']);
   }

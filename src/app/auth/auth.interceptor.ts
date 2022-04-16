@@ -36,6 +36,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.tokenService.getToken();
     if (token != null) {
       authReq = this.addTokenHeader(request, token);
+    } else {
+      this.tokenService.signOut();
     }
 
     return next.handle(authReq).pipe(

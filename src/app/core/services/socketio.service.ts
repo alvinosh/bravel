@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ApiHttpService } from './api-http.service';
 @Injectable({
   providedIn: 'root',
 })
 export class SocketioService {
-  constructor(private socket: Socket) {}
+  constructor(private socket: Socket, private api: ApiHttpService) {}
 
-  join(token: string) {
-    this.socket.emit('join', token);
+  join(username: string) {
+    this.socket.emit('join', username);
+    this.api.post(this.api.createUrl('user/online'), {}).subscribe();
   }
 
   logout(token: string) {

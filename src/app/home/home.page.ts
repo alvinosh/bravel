@@ -44,7 +44,7 @@ export class HomePage {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         if (ev.url === '/home') {
-          this.socket.join(this.token.getToken());
+          this.socket.join(this.token.getUser().username);
         }
       }
     });
