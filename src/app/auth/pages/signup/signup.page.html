@@ -40,7 +40,7 @@
       formControlName="confirmpassword"
     ></app-text-input>
 
-    <p *ngFor="let error of errors">* {{error}}</p>
+    <p *ngFor="let error of errors">{{error}}</p>
 
     <app-button [disabled]="!signupForm.valid">Sign Up</app-button>
 
