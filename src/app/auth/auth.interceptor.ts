@@ -36,7 +36,11 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.tokenService.getToken();
     if (token != null) {
       authReq = this.addTokenHeader(request, token);
-    } else if (!authReq.url.includes('offline')) {
+    } else if (
+      !authReq.url.includes('offline') &&
+      !authReq.url.includes('login') &&
+      !authReq.url.includes('signup')
+    ) {
       this.tokenService.signOut();
     }
 
@@ -45,6 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (
           error instanceof HttpErrorResponse &&
           !authReq.url.includes('signin') &&
+          !authReq.url.includes('login') &&
           error.status === 401
         ) {
           return this.handle401Error(authReq, next);

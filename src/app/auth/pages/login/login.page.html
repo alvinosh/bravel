@@ -14,7 +14,7 @@
       formControlName="password"
     ></app-text-input>
 
-    <p *ngFor="let error of errors">* {{error}}</p>
+    <p *ngFor="let error of errors">{{error}}</p>
 
     <app-button [disabled]="!loginForm.valid">Login</app-button>
 

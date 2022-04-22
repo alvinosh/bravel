@@ -45,7 +45,9 @@ export class LoginPage {
         this.token.saveUser(data.accessToken);
         this.router.navigate(['/home']);
       },
-      (error) => (this.errors = error.error.errors)
+      (error) => {
+        this.errors = error.error.errors;
+      }
     );
   }
 }
