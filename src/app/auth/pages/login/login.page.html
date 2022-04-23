@@ -1,6 +1,6 @@
 <app-background>
   <app-form [formGroup]="loginForm" (ngSubmit)="login()">
-    <h1>Login</h1>
+    <h1>LOGIN</h1>
 
     <app-text-input
       [type]="type.Text"
@@ -18,6 +18,6 @@
 
     <app-button [disabled]="!loginForm.valid">Login</app-button>
 
-    <a href="./signup">Don't Have An Account?</a>
+    <a (click)="redirectTo('signup')">Don't Have An Account?</a>
   </app-form>
 </app-background>

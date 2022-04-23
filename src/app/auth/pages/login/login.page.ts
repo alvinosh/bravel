@@ -50,4 +50,8 @@ export class LoginPage {
       }
     );
   }
+
+  redirectTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
 }

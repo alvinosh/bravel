@@ -113,4 +113,8 @@ export class SignupPage {
       (error) => (this.errors = error.error.errors)
     );
   }
+
+  redirectTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
 }
