@@ -28,6 +28,6 @@ h1 {
   }
 }
 
-:host::ng-deep.mat-select-value, :host::ng-deep.mat-form-field-label{
+:host::ng-deep.mat-select-value, :host::ng-deep.mat-form-field-label, :host::ng-deep.mat-slide-toggle-content{
   color: white !important;
 }
