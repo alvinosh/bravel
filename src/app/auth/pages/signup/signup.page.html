@@ -4,12 +4,14 @@
 
     <div class="name">
       <app-text-input
+        [empty]="isEmpty('firstname')"
         [type]="type.Text"
         label="First Name"
         formControlName="firstname"
       ></app-text-input>
 
       <app-text-input
+        [empty]="isEmpty('lastname')"
         [type]="type.Text"
         label="Last Name"
         formControlName="lastname"
@@ -17,30 +19,57 @@
     </div>
 
     <app-text-input
+      [empty]="isEmpty('email')"
       [type]="type.Email"
       label="E-Mail"
       formControlName="email"
     ></app-text-input>
 
     <app-text-input
+      [empty]="isEmpty('username')"
       [type]="type.Text"
       label="Username"
       formControlName="username"
     ></app-text-input>
 
     <app-text-input
+      [empty]="isEmpty('password')"
       [type]="type.Password"
       label="Password"
       formControlName="password"
     ></app-text-input>
 
     <app-text-input
+      [empty]="isEmpty('confirmpassword')"
       [type]="type.Password"
       label="Confirm Password"
       formControlName="confirmpassword"
     ></app-text-input>
 
     <p *ngFor="let error of errors">{{error}}</p>
+
+    <p
+      *ngIf="
+        signupForm['controls'].firstname.errors?.minlength ||     
+        signupForm['controls'].lastname.errors?.minlength ||    
+        signupForm['controls'].firstname.errors?.maxlength||     
+        signupForm['controls'].lastname.errors?.maxlength"
+    >
+      >Your First And Last Name Should Be Between 2 and 20 Characters
+    </p>
+
+    <p *ngIf="signupForm['controls'].email.errors?.email">
+      Please Enter A Valid Email
+    </p>
+
+    <p
+      *ngIf="signupForm['controls'].username.errors?.minlength ||     
+            signupForm['controls'].username.errors?.maxlength"
+    >
+      Your Username Should Be Between 3 and 20 Characters
+    </p>
+
+    <p *ngIf="signupForm.errors?.notmatched">Your Passwords Do Not Match</p>
 
     <app-button [disabled]="!signupForm.valid">Sign Up</app-button>
 

@@ -14,6 +14,7 @@ import { InputType } from 'src/app/shared/models/Input';
   ],
 })
 export class TextInputComponent implements ControlValueAccessor {
+  @Input() empty: boolean = false;
   @Input() label: string;
   @Input() type: InputType = InputType.Text;
 

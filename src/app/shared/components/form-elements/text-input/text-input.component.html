@@ -1,6 +1,7 @@
 <div class="form-row">
   <label for="input">{{ label }}</label>
   <input
+    [class.empty]="empty"
     [type]="getInput(type)"
     [value]="value"
     [disabled]="isDisabled"
