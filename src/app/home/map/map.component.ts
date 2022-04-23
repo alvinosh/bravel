@@ -5,6 +5,7 @@ import { Location } from 'src/app/shared/models/DTOs/Location';
 import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
+import 'leaflet.gridlayer.googlemutant';
 import {FeatureGroup, LatLngBounds, Marker, Polyline, tileLayer} from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
@@ -115,8 +116,10 @@ export class MapComponent implements OnInit, OnDestroy {
     }).addTo(this.map);
 
     setTimeout( () => {
-      this.tilelayer.addGoogleLayer('TrafficLayer')
-    }, 1000);
+      this.tilelayer = L.gridLayer.googleMutant({type: 'roadmap'});
+      this.tilelayer.addGoogleLayer('TrafficLayer');
+      this.tilelayer.addTo(this.map)
+    }, 2000);
   }
 
   private initMarkers(): void {
