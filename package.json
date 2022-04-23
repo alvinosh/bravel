@@ -41,7 +41,9 @@
     "rxjs": "~6.6.0",
     "socket.io-client": "^2.4.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@types/leaflet.gridlayer.googlemutant": "^0.4.4",
+    "@types/leaflet.markercluster": "^1.0.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.4",

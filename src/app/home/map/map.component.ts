@@ -5,6 +5,7 @@ import { Location } from 'src/app/shared/models/DTOs/Location';
 import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
+import {FeatureGroup, LatLngBounds, Marker, Polyline, tileLayer} from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
@@ -112,6 +113,10 @@ export class MapComponent implements OnInit, OnDestroy {
       maxZoom: 20,
       minZoom: 5,
     }).addTo(this.map);
+
+    setTimeout( () => {
+      this.tilelayer.addGoogleLayer('TrafficLayer')
+    }, 1000);
   }
 
   private initMarkers(): void {
@@ -141,7 +146,7 @@ export class MapComponent implements OnInit, OnDestroy {
             })
             .on('contextmenu', (e) => {
               L.popup()
-                .setLatLng(e.latlng)
+                // .setLatLng(e.latlng)
                 .setContent(
                   `
 									<pre>${user.username}</pre>
