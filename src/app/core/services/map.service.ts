@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
-import { HttpClient } from '@angular/common/http';
-import { MapName } from 'src/app/shared/models/map';
+
+import { MapName, Map } from 'src/app/shared/models/map';
 import { Subject } from 'rxjs';
+import { AUBERGINE, DARK, NIGHT, RETRO, STANDARD } from './map.themes';
 
 @Injectable({
   providedIn: 'root',
@@ -10,42 +10,69 @@ import { Subject } from 'rxjs';
 export class MapService {
   maps: MapName[] = [
     {
-      name: 'Default',
-      link: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      name: 'Standard',
+      data: STANDARD,
     },
     {
-      name: 'Hot',
-      link: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-    },
-    {
-      name: 'Kart',
-      link: 'https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png',
-    },
-    {
-      name: 'Height',
-      link: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-    },
-    {
-      name: 'Smooth',
-      link: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+      name: 'Aubergine',
+      data: AUBERGINE,
     },
     {
       name: 'Dark',
-      link: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+      data: DARK,
     },
     {
-      name: 'Light',
-      link: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+      name: 'Night',
+      data: NIGHT,
+    },
+    {
+      name: 'Retro',
+      data: RETRO,
+    },
+  ];
+
+  maps_type: MapName[] = [
+    {
+      name: 'Road Map',
+      data: 'roadmap',
+    },
+    {
+      name: 'Satelite',
+      data: 'satelite',
+    },
+    {
+      name: 'Terrain',
+      data: 'terrain',
+    },
+    {
+      name: 'Hybrid',
+      data: 'hybrid',
     },
   ];
 
   map_index = 0;
+  map_type_index = 0;
 
-  map_subject = new Subject<MapName>();
+  map_subject = new Subject<Map>();
+
+  traffic = true;
 
   constructor() {}
 
-  getSubject(): Subject<MapName> {
+  getTraffic(): boolean {
+    return this.traffic;
+  }
+
+  setTraffic(bool: boolean) {
+    this.traffic = bool;
+    this.map_subject.next({
+      style: this.getMap().data,
+      type: this.getMapType().data,
+      traffic: this.getTraffic(),
+    });
+  }
+
+  getSubject(): Subject<Map> {
     return this.map_subject;
   }
 
@@ -59,6 +86,27 @@ export class MapService {
 
   setIndex(i: number) {
     this.map_index = i;
-    this.map_subject.next(this.getMap());
+    this.map_subject.next({
+      style: this.getMap().data,
+      type: this.getMapType().data,
+      traffic: this.getTraffic(),
+    });
+  }
+
+  getMapType(): MapName {
+    return this.maps_type[this.map_type_index];
+  }
+
+  getMapsType(): MapName[] {
+    return this.maps_type;
+  }
+
+  setIndexType(i: number) {
+    this.map_type_index = i;
+    this.map_subject.next({
+      style: this.getMap().data,
+      type: this.getMapType().data,
+      traffic: this.getTraffic(),
+    });
   }
 }

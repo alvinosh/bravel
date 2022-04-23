@@ -6,13 +6,20 @@ import { LocationService } from 'src/app/core/services/location.service';
 
 import * as L from 'leaflet';
 import 'leaflet.gridlayer.googlemutant';
-import {FeatureGroup, LatLngBounds, Marker, Polyline, tileLayer} from 'leaflet';
+import {
+  FeatureGroup,
+  LatLngBounds,
+  Marker,
+  Polyline,
+  tileLayer,
+} from 'leaflet';
 import { UsersService } from '../../core/services/users.service';
 import { User } from 'src/app/shared/models/DTOs/User';
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { MapService } from 'src/app/core/services/map.service';
 import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service';
+import { DARK } from 'src/app/core/services/map.themes';
 const polyUtil = require('polyline-encoded');
 
 @Component({
@@ -52,10 +59,13 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.mapService.getSubject().subscribe((map) => {
       this.map.removeLayer(this.tilelayer);
-      this.tilelayer = L.tileLayer(this.mapService.getMap().link, {
-        maxZoom: 20,
-        minZoom: 5,
-      }).addTo(this.map);
+      this.tilelayer = L.gridLayer.googleMutant({
+        type: map.type as L.gridLayer.GoogleMutantType,
+        styles: map.style,
+      });
+
+      if (map.traffic) this.tilelayer.addGoogleLayer('TrafficLayer');
+      this.tilelayer.addTo(this.map);
     });
   }
 
@@ -110,16 +120,9 @@ export class MapComponent implements OnInit, OnDestroy {
       layers: [this.markers],
     });
 
-    this.tilelayer = L.tileLayer(this.mapService.getMap().link, {
-      maxZoom: 20,
-      minZoom: 5,
-    }).addTo(this.map);
-
-    setTimeout( () => {
-      this.tilelayer = L.gridLayer.googleMutant({type: 'roadmap'});
-      this.tilelayer.addGoogleLayer('TrafficLayer');
-      this.tilelayer.addTo(this.map)
-    }, 2000);
+    this.tilelayer = L.gridLayer.googleMutant();
+    this.tilelayer.addGoogleLayer('TrafficLayer');
+    this.tilelayer.addTo(this.map);
   }
 
   private initMarkers(): void {

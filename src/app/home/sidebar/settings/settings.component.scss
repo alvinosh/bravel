@@ -14,7 +14,7 @@
 
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -41,4 +41,13 @@ h1 {
 mat-form-field {
   width: 100%;
   overflow-y: hidden;
+}
+
+mat-slide-toggle {
+  margin-right: auto;
+  padding: 30px 10px;
+  color: black;
+
+  display: flex;
+  align-items: center;
 }

@@ -1,12 +1,23 @@
 <div class="container">
   <mat-form-field>
-    <mat-label>Select an option</mat-label>
+    <mat-label>Map Theme</mat-label>
     <mat-select [(value)]="ii" (selectionChange)="onChange()">
       <mat-option *ngFor="let map of maps; let i = index" [value]="i">{{
         map.name
       }}</mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Map Type</mat-label>
+    <mat-select [(value)]="ij" (selectionChange)="onChangeType()">
+      <mat-option *ngFor="let map of maps_type; let i = index" [value]="i">{{
+        map.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-slide-toggle [(ngModel)]="ik" (change)="onChangeTraffic()">
+    Traffic
+  </mat-slide-toggle>
 
   <button (click)="logout()">Log Out</button>
 
