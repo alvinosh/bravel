@@ -2,6 +2,7 @@
 
 a {
   margin: 10px auto;
+  color: $light-blue;
 }
 
 app-button {
@@ -26,7 +27,7 @@ h1 {
 
   font-size: 2rem;
 
-  color: $color-3;
+  color: $light-blue;
 }
 
 .name {
@@ -42,10 +43,10 @@ p {
   margin-top: 5px;
   padding: 8px;
   border-radius: 8px;
-  background-color: #ffc7c7;
-  color: $error;
+  background-color: #f44336;
+  color: $white;
 }
 
 .req {
-  border: 1px red solid;
+  border: 1px #f44336 solid;
 }
