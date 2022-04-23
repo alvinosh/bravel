@@ -38,7 +38,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private panZoom = 15;
 
-  private updateTime = 5000;
+  private updateTime = 50000;
   private locInterval;
   private polyline: any;
 
@@ -104,6 +104,10 @@ export class MapComponent implements OnInit, OnDestroy {
         longitude: item.long,
       },
     };
+    // return {
+    //   lat: data.coords.latitude,
+    //   lon: data.coords.longitude,
+    // };
     return {
       lat: mockData.coords.latitude,
       lon: mockData.coords.longitude,
@@ -175,7 +179,7 @@ export class MapComponent implements OnInit, OnDestroy {
     const cu = this.tokenstorageService.getUser();
 
     console.log('cu: ', cu);
-    if (user.id !== (cu.id || cu.location['id'] || cu.location['userId'])) {
+    if (user.id !== (cu.id || (cu.location && (cu.location['id'] || cu.location['userId'])))) {
       const updatedCU = data.find((u) => u.username === cu.username);
       const route = `${updatedCU.location.lon},${updatedCU.location.lat};${user.location.lon},${user.location.lat}`;
       this.locationService.getOSRMRoute(route).subscribe((response) => {
