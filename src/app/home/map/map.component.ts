@@ -131,15 +131,15 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private initMarkers(): void {
     let icon = L.icon({
-      iconUrl: 'assets/user.png',
-      iconSize: [30, 30], // size of the icon
+      iconUrl: 'assets/car_blue_two.png',
+      iconSize: [35, 35], // size of the icon
       iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
     });
 
     let c_icon = L.icon({
-      iconUrl: 'assets/c_user.png',
-      iconSize: [30, 30], // size of the icon
-      iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
+      iconUrl: 'assets/c_user_home.png',
+      iconSize: [60, 60], // size of the icon
+      iconAnchor: [30, 30], // point of the icon which will correspond to marker's location
     });
 
     this.usersService.getUsers().subscribe((data) => {
