@@ -57,3 +57,13 @@ app-navbar {
     height: 0;
   }
 }
+
+img {
+  z-index: 5000;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 10px;
+  left: 50vw;
+  transform: translateX(-50%);
+}
