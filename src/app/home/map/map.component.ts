@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 
 import { Location } from 'src/app/shared/models/DTOs/Location';
 
@@ -36,11 +36,19 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private tilelayer;
 
+  private distance;
+
   private panZoom = 15;
 
-  private updateTime = 50000;
+  private updateTime = 5000;
   private locInterval;
   private polyline: any;
+
+  private following;
+
+  private users_sub;
+
+  private button;
 
   constructor(
     private locationService: LocationService,
@@ -94,6 +102,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private async getLocation(): Promise<Location> {
     let data = await this.locationService.getGeopostion();
+
     const item =
       this.locationService.randomItems[
         Math.floor(Math.random() * this.locationService.randomItems.length)
@@ -114,6 +123,10 @@ export class MapComponent implements OnInit, OnDestroy {
     };
   }
 
+  private testcall() {
+    console.log('a');
+  }
+
   private initMap(loc: Location): void {
     this.markers = new L.LayerGroup();
 
@@ -130,6 +143,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private initMarkers(): void {
+    if (this.users_sub) this.users_sub.unsubscribe();
+
     let icon = L.icon({
       iconUrl: 'assets/car_blue_two.png',
       iconSize: [35, 35], // size of the icon
@@ -142,11 +157,15 @@ export class MapComponent implements OnInit, OnDestroy {
       iconAnchor: [30, 30], // point of the icon which will correspond to marker's location
     });
 
-    this.usersService.getUsers().subscribe((data) => {
+    this.users_sub = this.usersService.getUsers().subscribe((data) => {
       this.markers.clearLayers();
       let map = this.map;
       if (data) {
         data.forEach((user) => {
+          if (user.username == this.following) {
+            this.setViewOrRoute(map, user, data);
+          }
+
           L.marker([user.location.lat, user.location.lon], {
             icon: this.usersService.isCurrentUser(user) ? c_icon : icon,
           })
@@ -175,15 +194,40 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.setView([user.location.lat, user.location.lon], this.panZoom);
   }
 
+  @HostListener('window:removefollow', ['$event'])
+  KeyUpCtrl() {
+    this.following = null;
+    if (this.polyline) this.map.removeLayer(this.polyline);
+  }
+
   private setViewOrRoute(map, user: User, data) {
     const cu = this.tokenstorageService.getUser();
-
-    console.log('cu: ', cu);
-    if (user.id !== (cu.id || (cu.location && (cu.location['id'] || cu.location['userId'])))) {
+    this.following = user.username;
+    if (
+      user.id !==
+      (cu.id || (cu.location && (cu.location['id'] || cu.location['userId'])))
+    ) {
       const updatedCU = data.find((u) => u.username === cu.username);
       const route = `${updatedCU.location.lon},${updatedCU.location.lat};${user.location.lon},${user.location.lat}`;
+
       this.locationService.getOSRMRoute(route).subscribe((response) => {
         response['routes'].map((m) => {
+          if (this.distance) this.map.removeLayer(this.distance);
+          this.distance = L.popup()
+            .setLatLng([user.location.lat, user.location.lon])
+            .setContent(
+              `<p class="followText">${m.distance}m Away </p><br/> 
+              <p class="followText"> ${m.duration}s Away </p><br />
+                        <button class="followButton" onclick="(function () {
+                          let testEvent = new Event('removefollow');
+                          window.dispatchEvent(testEvent);
+                        })()">
+                          Stop Following
+                        </button>
+                        `
+            )
+            .addTo(this.map);
+          if (this.polyline) this.map.removeLayer(this.polyline);
           this.polyline = L.polyline(polyUtil.decode(m.geometry));
           this.polyline.addTo(map);
         });

@@ -8,6 +8,7 @@ import { SocketioService } from './socketio.service';
 import { Location } from 'src/app/shared/models/DTOs/Location';
 import { Room } from 'src/app/shared/models/DTOs/Room';
 import { TokenstorageService } from 'src/app/auth/services/tokenstorage.service';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,7 @@ export class UsersService {
   }
 
   loadUsers() {
-    this.api.get(this.api.createUrl('users')).subscribe((data) => {
+    let a = this.api.get(this.api.createUrl('users')).subscribe((data) => {
       let onlineUsers: User[] = data.users.map((user) => {
         if (this.isCurrentUser(user)) this.currentUserSubject.next(user);
         return this.formatData(user);
