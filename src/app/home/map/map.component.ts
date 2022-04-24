@@ -64,17 +64,6 @@ export class MapComponent implements OnInit, OnDestroy {
       this.user = data;
       this.initMarkers();
     });
-
-    this.mapService.getSubject().subscribe((map) => {
-      this.map.removeLayer(this.tilelayer);
-      this.tilelayer = L.gridLayer.googleMutant({
-        type: map.type as L.gridLayer.GoogleMutantType,
-        styles: map.style,
-      });
-
-      if (map.traffic) this.tilelayer.addGoogleLayer('TrafficLayer');
-      this.tilelayer.addTo(this.map);
-    });
   }
 
   ngOnDestroy() {
@@ -137,9 +126,16 @@ export class MapComponent implements OnInit, OnDestroy {
       layers: [this.markers],
     });
 
-    this.tilelayer = L.gridLayer.googleMutant();
-    this.tilelayer.addGoogleLayer('TrafficLayer');
-    this.tilelayer.addTo(this.map);
+    this.mapService.getSubject().subscribe((map) => {
+      if (this.tilelayer) this.map.removeLayer(this.tilelayer);
+      this.tilelayer = L.gridLayer.googleMutant({
+        type: map.type as L.gridLayer.GoogleMutantType,
+        styles: map.style,
+      });
+
+      if (map.traffic) this.tilelayer.addGoogleLayer('TrafficLayer');
+      this.tilelayer.addTo(this.map);
+    });
   }
 
   private initMarkers(): void {

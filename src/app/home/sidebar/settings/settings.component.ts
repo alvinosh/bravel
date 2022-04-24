@@ -31,6 +31,7 @@ export class SettingsComponent {
     this.ii = mapService.map_index;
     this.ij = mapService.map_type_index;
     this.ik = mapService.getTraffic();
+    this.il = mapService.follow;
   }
 
   onChange() {
