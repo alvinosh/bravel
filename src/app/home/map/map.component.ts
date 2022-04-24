@@ -160,6 +160,10 @@ export class MapComponent implements OnInit, OnDestroy {
     this.users_sub = this.usersService.getUsers().subscribe((data) => {
       this.markers.clearLayers();
       let map = this.map;
+      if (!this.mapService.follow) {
+        this.following = null;
+        if (this.polyline) this.map.removeLayer(this.polyline);
+      }
       if (data) {
         data.forEach((user) => {
           if (user.username == this.following) {

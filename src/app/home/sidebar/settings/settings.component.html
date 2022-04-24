@@ -15,8 +15,20 @@
       }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-slide-toggle [(ngModel)]="ik" (change)="onChangeTraffic()" color="primary">
+  <mat-slide-toggle
+    [(ngModel)]="ik"
+    (change)="onChangeTraffic()"
+    color="primary"
+  >
     Traffic
+  </mat-slide-toggle>
+
+  <mat-slide-toggle
+    [(ngModel)]="il"
+    (change)="onChangeFollow()"
+    color="primary"
+  >
+    Follow
   </mat-slide-toggle>
 
   <button (click)="logout()">Log Out</button>

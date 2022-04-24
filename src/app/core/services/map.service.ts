@@ -56,6 +56,7 @@ export class MapService {
   map_subject = new Subject<Map>();
 
   traffic = true;
+  follow = true;
 
   constructor() {}
 
@@ -108,5 +109,9 @@ export class MapService {
       type: this.getMapType().data,
       traffic: this.getTraffic(),
     });
+  }
+
+  setFollow(bool: boolean) {
+    this.follow = bool;
   }
 }

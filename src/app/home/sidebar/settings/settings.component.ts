@@ -19,6 +19,7 @@ export class SettingsComponent {
   ii = 0;
   ij = 0;
   ik = false;
+  il = true;
 
   constructor(
     private token: TokenstorageService,
@@ -41,9 +42,11 @@ export class SettingsComponent {
   }
 
   onChangeTraffic() {
-    console.log(this.ik);
-
     this.mapService.setTraffic(this.ik);
+  }
+
+  onChangeFollow() {
+    this.mapService.setFollow(this.il);
   }
 
   getUser(): User {
