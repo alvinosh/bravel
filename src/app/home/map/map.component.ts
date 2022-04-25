@@ -40,7 +40,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private panZoom = 15;
 
-  private updateTime = 5000;
+  private updateTime = 120000;
   private locInterval;
   private polyline: any;
 
@@ -216,8 +216,8 @@ export class MapComponent implements OnInit, OnDestroy {
           this.distance = L.popup()
             .setLatLng([user.location.lat, user.location.lon])
             .setContent(
-              `<p class="followText">${m.distance}m Away </p><br/> 
-              <p class="followText"> ${m.duration}s Away </p><br />
+              `<p class="followText">Distance: ${m.distance}m Away </p><br/>
+              <p class="followText"> Predicted time: ${m.duration}s Away </p><br />
                         <button class="followButton" onclick="(function () {
                           let testEvent = new Event('removefollow');
                           window.dispatchEvent(testEvent);

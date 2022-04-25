@@ -12,3 +12,10 @@
   height: 100%;
   width: 100%;
 }
+
+
+:host::ng-deep.leaflet-popup-content-wrapper {
+  background: #162857;
+  color: white;
+  text-align: center;
+}
